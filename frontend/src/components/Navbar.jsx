@@ -87,7 +87,7 @@ const Navbar = () => {
           <div className="hidden md:flex justify-center flex-1">
             <div className="flex space-x-2 lg:space-x-4">
               <button 
-                onClick={() => handleNavigation('/home', 'home')}
+                onClick={() => handleNavigation('/', 'home')}
                 className={`px-6 lg:px-12 py-2 rounded-xl hover:bg-gray-100 transition-all duration-200 border-b-4 ${
                   activeLink === 'home' ? 'border-blue-500 bg-blue-50' : 'border-transparent'
                 }`}

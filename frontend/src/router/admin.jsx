@@ -7,7 +7,7 @@ import { Login } from '../page/user/Login';
 
 // Public routes
 const publicRoutes = [
-    { path: '/home', component: Home },
+    { path: '/', component: Home },
     { path: '/reels', component: Reels },
     { path: '/group', component: Group }, 
     { path: '/notification', component: Notification },
