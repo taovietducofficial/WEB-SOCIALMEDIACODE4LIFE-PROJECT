@@ -1,0 +1,230 @@
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+  padding: clamp(10px, 3vw, 20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.login::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(15, 92, 5, 0.08) 0%, transparent 65%);
+  animation: rotate 40s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  to { transform: rotate(360deg) scale(1); }
+}
+
+.login-container {
+  width: min(100%, 450px);
+  padding: clamp(20px, 5vw, 40px) clamp(15px, 4vw, 30px);
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: clamp(12px, 3vw, 20px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  margin: 20px auto;
+  animation: fadeIn 1.2s ease-out;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.login-container h1 {
+  color: #0f5c05;
+  font-size: clamp(32px, 8vw, 60px);
+  font-weight: 800;
+  margin-bottom: clamp(20px, 5vw, 35px);
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 3px 3px 6px rgba(15, 92, 5, 0.2);
+  letter-spacing: -0.5px;
+  background: linear-gradient(45deg, #0f5c05, #1a8a0a, #2eb81d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% { text-shadow: 3px 3px 6px rgba(15, 92, 5, 0.2); }
+  50% { text-shadow: 3px 3px 15px rgba(15, 92, 5, 0.4); }
+}
+
+.form-group {
+  margin-bottom: clamp(20px, 4vw, 28px);
+  width: 100%;
+}
+
+.form-group label {
+  display: none;
+}
+
+.form-group input {
+  width: 100%;
+  padding: clamp(12px, 3vw, 20px) clamp(14px, 3.5vw, 24px);
+  border: clamp(1.5px, 0.3vw, 2.5px) solid #e9ecef;
+  border-radius: clamp(8px, 2vw, 14px);
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: #212529;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: #f8f9fa;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #0f5c05;
+  box-shadow: 0 0 0 clamp(3px, 1vw, 5px) rgba(15, 92, 5, 0.18);
+  background-color: white;
+  transform: translateY(-3px);
+}
+
+button {
+  width: 100%;
+  padding: clamp(12px, 3vw, 20px);
+  background: linear-gradient(145deg, #0f5c05, #0d4f04, #0f5c05);
+  background-size: 200% auto;
+  color: white;
+  border: none;
+  border-radius: clamp(8px, 2vw, 14px);
+  font-size: clamp(14px, 2.8vw, 21px);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: clamp(16px, 4vw, 26px);
+  text-transform: uppercase;
+  letter-spacing: clamp(1px, 0.3vw, 2px);
+  box-shadow: 0 8px 15px rgba(15, 92, 5, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: gradientMove 3s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: 0.6s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  background-position: right center;
+  transform: translateY(clamp(-4px, -1vw, -2px));
+  box-shadow: 0 12px 20px rgba(15, 92, 5, 0.4);
+  letter-spacing: clamp(2px, 0.4vw, 3px);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 10px rgba(15, 92, 5, 0.25);
+}
+
+@media screen and (max-width: 768px) {
+  .login-container {
+    padding: clamp(20px, 4vw, 30px) clamp(15px, 3vw, 22px);
+    margin: 15px;
+  }
+  
+  .form-group {
+    margin-bottom: clamp(16px, 3vw, 20px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .login-container {
+    padding: 20px 15px;
+    margin: 10px;
+  }
+  
+  .form-group input {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+  
+  button {
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-height: 900px) {
+  .login {
+    padding: 10px;
+  }
+  
+  .login-container {
+    margin: 10px auto;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .login {
+    padding: 8px;
+  }
+  
+  .login-container {
+    padding: 15px;
+    margin: 8px auto;
+  }
+  
+  .login-container h1 {
+    font-size: clamp(28px, 6vw, 48px);
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .login {
+    padding: 5px;
+  }
+  
+  .login-container {
+    padding: 10px;
+    margin: 5px auto;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .login-container h1 {
+    font-size: clamp(24px, 5vw, 36px);
+    margin-bottom: 10px;
+  }
+}

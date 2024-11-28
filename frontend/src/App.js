@@ -1,9 +1,19 @@
-import React from 'react'
-import './App.css'
-const App = () => {
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { publicRoutes } from "./router/admin";
+
+function App() {
   return (
-    <div>App</div>
-  )
+    <Router>
+      <div className="App">
+        <Routes>
+          {publicRoutes.map((route, index) => {
+            const Page = route.component;
+            return <Route key={index} path={route.path} element={<Page />} />
+          })}
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
