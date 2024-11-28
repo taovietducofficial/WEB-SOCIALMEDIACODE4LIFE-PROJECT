@@ -1,18 +1,7 @@
-import Home from '../page/user/Home';
-import Group from '../page/user/Group';
-import { Profile } from '../page/user/Profile';
-import { Login } from '../page/user/Login';
+import DashboardAD from '../page/admin/DashboardAD';
 
-// Public routes
-const publicRoutes = [
-    { path: '/', component: Home },
-    { path: '/group', component: Group }, 
-    { path: '/profile', component: Profile },
-    { path: '/login', component: Login },
-];
+const adminRoutes = [
+    {path: '/admin/dashboard', component: DashboardAD},
+]
 
-const privateRoutes = [
-
-];
-
-export { publicRoutes, privateRoutes }
+export default adminRoutes;
