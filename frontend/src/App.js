@@ -9,17 +9,19 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      <Routes>
-        {adminRoutes.map((route, index) => (
-          <Route key={index} path={route.path} element={<route.component />} />
-        ))}
-        {userRoutes.map((route, index) => (
-          <Route key={index} path={route.path} element={<route.component />} />
-        ))}
-        {instructorRoutes.map((route, index) => (
-          <Route key={index} path={route.path} element={<route.component />} />
-        ))}
-      </Routes>
+      <div className="mt-16"> {/* Add margin-top to account for fixed navbar */}
+        <Routes>
+          {adminRoutes.map((route, index) => (
+            <Route key={index} path={route.path} element={<route.component />} />
+          ))}
+          {userRoutes.map((route, index) => (
+            <Route key={index} path={route.path} element={<route.component />} />
+          ))}
+          {instructorRoutes.map((route, index) => (
+            <Route key={index} path={route.path} element={<route.component />} />
+          ))}
+        </Routes>
+      </div>
     </Router>
   )
 }
