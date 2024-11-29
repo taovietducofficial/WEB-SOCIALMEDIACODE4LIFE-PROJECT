@@ -9,6 +9,7 @@ const Home = () => {
   const [comments, setComments] = useState({}) // Lưu comments theo postId
   const [showComments, setShowComments] = useState({}) // Hiển thị/ẩn comments
   const [commentContent, setCommentContent] = useState('') // Nội dung comment
+  const [typingUsers, setTypingUsers] = useState({}) // Add typingUsers state
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -100,6 +101,31 @@ const Home = () => {
     }))
   }
 
+  // Thêm hàm xóa comment
+  const handleDeleteComment = (postId, commentId) => {
+    setComments({
+      ...comments,
+      [postId]: comments[postId].filter(comment => comment.id !== commentId)
+    })
+  }
+
+  // Thêm hàm xáo trộn bài post
+  const handleShufflePosts = () => {
+    const shuffledPosts = [...posts]
+    for (let i = shuffledPosts.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledPosts[i], shuffledPosts[j]] = [shuffledPosts[j], shuffledPosts[i]]
+    }
+    setPosts(shuffledPosts)
+  }
+
+  // Thêm hàm xóa bài post
+  const handleDeletePost = (postId) => {
+    if (window.confirm('Bạn có chắc chắn muốn xóa bài viết này không?')) {
+      setPosts(posts.filter(post => post.id !== postId))
+    }
+  }
+
   return (
     <div className="flex bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
       {/* Left Sidebar */}
@@ -124,7 +150,7 @@ const Home = () => {
               onClick={() => document.getElementById('createPostModal').showModal()}
             />
           </div>
-          <div className="flex justify-center gap-48 mt-6 pt-3 border-t border-gray-100">
+          <div className="flex justify-center gap-32 mt-6 pt-3 border-t border-gray-100">
             <button
               onClick={() => document.getElementById('createPostModal').showModal()}
               className="flex items-center space-x-2 hover:bg-blue-50 px-6 py-2.5 rounded-xl transition-colors duration-200"
@@ -246,18 +272,28 @@ const Home = () => {
                     <span className="font-medium">{post.user.name}</span> đã chia sẻ một bài viết
                   </div>
                 )}
-                <div className="flex items-center space-x-3">
-                  <img
-                    src={post.user.avatar}
-                    alt="User"
-                    className="rounded-full ring-2 ring-blue-100"
-                  />
-                  <div>
-                    <h3 className="font-semibold text-lg">{post.user.name}</h3>
-                    <p className="text-gray-500 text-sm">
-                      {new Date(post.timestamp).toLocaleTimeString()}
-                    </p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src={post.user.avatar}
+                      alt="User"
+                      className="rounded-full ring-2 ring-blue-100"
+                    />
+                    <div>
+                      <h3 className="font-semibold text-lg">{post.user.name}</h3>
+                      <p className="text-gray-500 text-sm">
+                        {new Date(post.timestamp).toLocaleTimeString()}
+                      </p>
+                    </div>
                   </div>
+                  <button 
+                    onClick={() => handleDeletePost(post.id)}
+                    className="p-2 hover:bg-red-50 rounded-full transition-colors group"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-hover:text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                  </button>
                 </div>
                 <p className="mt-4 text-gray-800">{post.content}</p>
                 {post.file && (
@@ -313,7 +349,7 @@ const Home = () => {
                         alt="User"
                         className="w-8 h-8 rounded-full"
                       />
-                      <div className="flex-1">
+                      <div className="flex-1 flex space-x-2">
                         <input
                           type="text"
                           value={commentContent}
@@ -326,28 +362,60 @@ const Home = () => {
                             }
                           }}
                         />
+                        <button
+                          onClick={() => handleComment(post.id)}
+                          className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
+                          disabled={!commentContent.trim()}
+                        >
+                          Gửi
+                        </button>
                       </div>
                     </div>
                     
-                    {/* Comment List */}
-                    {comments[post.id]?.map(comment => (
-                      <div key={comment.id} className="flex space-x-2">
-                        <img
-                          src={comment.user.avatar}
-                          alt="User"
-                          className="w-8 h-8 rounded-full"
-                        />
-                        <div className="flex-1">
-                          <div className="bg-gray-100 rounded-2xl px-4 py-2">
-                            <p className="font-medium">{comment.user.name}</p>
-                            <p>{comment.content}</p>
-                          </div>
-                          <div className="mt-1 text-sm text-gray-500">
-                            {new Date(comment.timestamp).toLocaleTimeString()}
+                    {/* Comment List with Real-time Updates */}
+                    <div className="relative">
+                      {comments[post.id]?.map(comment => (
+                        <div key={comment.id} className="flex space-x-2 animate-fade-in">
+                          <img
+                            src={comment.user.avatar}
+                            alt="User"
+                            className="w-8 h-8 rounded-full"
+                          />
+                          <div className="flex-1">
+                            <div className="bg-gray-100 rounded-2xl px-4 py-2">
+                              <p className="font-medium">{comment.user.name}</p>
+                              <p>{comment.content}</p>
+                            </div>
+                            <div className="mt-1 text-sm text-gray-500 flex items-center space-x-2">
+                              <span>{new Date(comment.timestamp).toLocaleTimeString()}</span>
+                              <button 
+                                onClick={() => handleDeleteComment(post.id, comment.id)}
+                                className="text-red-500 hover:text-red-600"
+                              >
+                                Xóa
+                              </button>
+                              {comment.isTyping && (
+                                <span className="text-blue-500 text-xs animate-pulse">
+                                  • đang nhập...
+                                </span>
+                              )}
+                              {comment.isNew && (
+                                <span className="bg-blue-100 text-blue-600 text-xs px-2 py-0.5 rounded-full">
+                                  Mới
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                      
+                      {/* Real-time typing indicator */}
+                      {typingUsers[post.id]?.length > 0 && (
+                        <div className="absolute bottom-0 left-0 w-full bg-white/80 backdrop-blur-sm p-2 rounded-lg text-sm text-gray-500">
+                          {typingUsers[post.id].join(", ")} đang nhập bình luận...
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -357,16 +425,23 @@ const Home = () => {
           {/* Sample Post */}
           <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
             <div className="p-6">
-              <div className="flex items-center space-x-3">
-                <img
-                  src="https://via.placeholder.com/48"
-                  alt="User"
-                  className="rounded-full ring-2 ring-blue-100"
-                />
-                <div>
-                  <h3 className="font-semibold text-lg">Người dùng</h3>
-                  <p className="text-gray-500 text-sm">2 giờ trước</p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <img
+                    src="https://via.placeholder.com/48"
+                    alt="User"
+                    className="rounded-full ring-2 ring-blue-100"
+                  />
+                  <div>
+                    <h3 className="font-semibold text-lg">Người dùng</h3>
+                    <p className="text-gray-500 text-sm">2 giờ trước</p>
+                  </div>
                 </div>
+                <button className="p-2 hover:bg-red-50 rounded-full transition-colors group">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-hover:text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                </button>
               </div>
               <p className="mt-4 text-gray-800">Đây là nội dung bài viết mẫu</p>
               <img
