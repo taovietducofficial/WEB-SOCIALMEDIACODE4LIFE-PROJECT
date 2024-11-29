@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaUsers, FaUserPlus, FaSearch, FaEllipsisH, FaImage, FaSmile, FaThumbsUp, FaPaperPlane, FaTimes } from 'react-icons/fa'
+import { FaUsers, FaUserPlus, FaSearch, FaEllipsisH, FaImage, FaSmile, FaThumbsUp, FaPaperPlane, FaTimes, FaTrash } from 'react-icons/fa'
 
 const Group = () => {
   const [groups, setGroups] = useState([
@@ -56,6 +56,7 @@ const Group = () => {
   const [newGroupName, setNewGroupName] = useState('')
   const [selectedMembers, setSelectedMembers] = useState([])
   const [searchMember, setSearchMember] = useState('')
+  const [showGroupOptions, setShowGroupOptions] = useState(false)
 
   // Danh sách người dùng mẫu để chọn thành viên
   const [availableMembers] = useState([
@@ -134,6 +135,15 @@ const Group = () => {
 
     setMessages([...messages, newMessage])
     setMessageInput('')
+  }
+
+  const handleDeleteGroup = () => {
+    if (window.confirm('Bạn có chắc chắn muốn xóa nhóm này?')) {
+      const newGroups = groups.filter(group => group.id !== selectedGroup.id)
+      setGroups(newGroups)
+      setSelectedGroup(newGroups[0] || null)
+      setShowGroupOptions(false)
+    }
   }
 
   return (
@@ -227,9 +237,25 @@ const Group = () => {
               <button className="p-2 hover:bg-gray-100 rounded-full">
                 <FaSearch className="text-gray-600" />
               </button>
-              <button className="p-2 hover:bg-gray-100 rounded-full">
-                <FaEllipsisH className="text-gray-600" />
-              </button>
+              <div className="relative">
+                <button 
+                  className="p-2 hover:bg-gray-100 rounded-full"
+                  onClick={() => setShowGroupOptions(!showGroupOptions)}
+                >
+                  <FaEllipsisH className="text-gray-600" />
+                </button>
+                {showGroupOptions && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50">
+                    <button 
+                      onClick={handleDeleteGroup}
+                      className="w-full px-4 py-2 text-left text-red-500 hover:bg-gray-100 rounded-lg flex items-center"
+                    >
+                      <FaTrash className="mr-2" />
+                      Xóa nhóm
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
