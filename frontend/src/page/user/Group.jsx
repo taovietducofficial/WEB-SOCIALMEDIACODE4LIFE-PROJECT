@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaUsers, FaUserPlus, FaSearch, FaEllipsisH, FaImage, FaSmile, FaThumbsUp, FaPaperPlane, FaTimes, FaTrash, FaUndoAlt } from 'react-icons/fa'
+import { FaUsers, FaUserPlus, FaSearch, FaEllipsisH, FaImage, FaSmile, FaThumbsUp, FaPaperPlane, FaTimes, FaTrash, FaUndoAlt, FaPhone, FaVideo, FaInfoCircle, FaPlus } from 'react-icons/fa'
 
 const Group = () => {
   const [groups, setGroups] = useState([
@@ -14,12 +14,12 @@ const Group = () => {
       isOnline: true
     },
     {
-      id: 2, 
-      name: 'Nhóm gia đình',
+      id: 2,
+      name: 'Nhóm gia đình', 
       avatar: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3',
       members: 8,
       lastMessage: 'Cuối tuần mình họp mặt nhé',
-      lastMessageTime: '09:15', 
+      lastMessageTime: '09:15',
       unread: 0,
       isOnline: false
     }
@@ -35,8 +35,9 @@ const Group = () => {
       },
       content: 'Xin chào mọi người!',
       timestamp: '12:25',
-      reactions: ['👍', '❤️'],
-      isRecalled: false
+      reactions: [],
+      isRecalled: false,
+      type: 'text'
     },
     {
       id: 2,
@@ -48,7 +49,8 @@ const Group = () => {
       content: 'Chào bạn!',
       timestamp: '12:26',
       reactions: [],
-      isRecalled: false
+      isRecalled: false,
+      type: 'text'
     }
   ])
 
@@ -60,6 +62,9 @@ const Group = () => {
   const [searchMember, setSearchMember] = useState('')
   const [showGroupOptions, setShowGroupOptions] = useState(false)
   const [showMessageOptions, setShowMessageOptions] = useState(null)
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+  const [showReactionPopup, setShowReactionPopup] = useState(null)
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false)
 
   const [availableMembers] = useState([
     { id: 1, name: 'Nguyễn Văn A', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3' },
@@ -96,7 +101,7 @@ const Group = () => {
       avatar: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3',
       members: selectedMembers.length + 1,
       lastMessage: 'Nhóm vừa được tạo',
-      lastMessageTime: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+      lastMessageTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       unread: 0,
       isOnline: true
     }
@@ -117,8 +122,8 @@ const Group = () => {
     setSelectedMembers(selectedMembers.filter(m => m.id !== memberId))
   }
 
-  const handleSendMessage = () => {
-    if (!messageInput.trim()) return
+  const handleSendMessage = (isLike = false) => {
+    if (!messageInput.trim() && !isLike) return
 
     const newMessage = {
       id: messages.length + 1,
@@ -127,10 +132,12 @@ const Group = () => {
         name: 'Tôi',
         avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3'
       },
-      content: messageInput,
-      timestamp: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+      content: isLike ? '👍' : messageInput,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       reactions: [],
-      isRecalled: false
+      isRecalled: false,
+      type: 'text',
+      recallTime: null
     }
 
     setMessages([...messages, newMessage])
@@ -138,86 +145,160 @@ const Group = () => {
   }
 
   const handleDeleteGroup = () => {
-    if (window.confirm('Bạn có chắc chắn muốn xóa nhóm này?')) {
-      const newGroups = groups.filter(group => group.id !== selectedGroup.id)
-      setGroups(newGroups)
-      setSelectedGroup(newGroups[0] || null)
-      setShowGroupOptions(false)
+    if (!selectedGroup) return
+
+    // Xóa nhóm khỏi danh sách groups
+    const updatedGroups = groups.filter(group => group.id !== selectedGroup.id)
+    setGroups(updatedGroups)
+    
+    // Cập nhật selectedGroup
+    if (updatedGroups.length > 0) {
+      setSelectedGroup(updatedGroups[0])
+    } else {
+      setSelectedGroup(null)
     }
+    
+    // Xóa tin nhắn của nhóm
+    setMessages([])
+    setShowGroupOptions(false)
+    
+    // Hiển thị thông báo
+    setShowDeleteAlert(true)
+    setTimeout(() => {
+      setShowDeleteAlert(false)
+    }, 3000)
   }
 
-  const handleRecallMessage = (messageId) => {
-    if (window.confirm('Bạn có chắc chắn muốn thu hồi tin nhắn này?')) {
-      setMessages(messages.map(message => 
-        message.id === messageId 
-          ? {...message, isRecalled: true}
-          : message
-      ))
+  const handleDeleteMessage = (messageId) => {
+    if (window.confirm('Bạn có chắc chắn muốn xóa tin nhắn này?')) {
+      setMessages(messages.filter(message => message.id !== messageId))
       setShowMessageOptions(null)
     }
   }
 
+  const handleRecallMessage = (messageId) => {
+    const now = new Date()
+    const message = messages.find(m => m.id === messageId)
+    const messageTime = new Date()
+    messageTime.setHours(parseInt(message.timestamp.split(':')[0]))
+    messageTime.setMinutes(parseInt(message.timestamp.split(':')[1]))
+
+    // Kiểm tra thời gian thu hồi (trong vòng 30 phút)
+    const timeDiff = (now - messageTime) / (1000 * 60) // Đổi ra phút
+
+    if (timeDiff > 30) {
+      alert('Không thể thu hồi tin nhắn sau 30 phút!')
+      return
+    }
+
+    setMessages(messages.map(message =>
+      message.id === messageId
+        ? { 
+            ...message, 
+            isRecalled: true, 
+            content: 'Tin nhắn đã được thu hồi',
+            recallTime: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          }
+        : message
+    ))
+    setShowMessageOptions(null)
+  }
+
+  const handleReaction = (messageId, reaction) => {
+    setMessages(messages.map(message =>
+      message.id === messageId
+        ? {
+          ...message,
+          reactions: message.reactions.includes(reaction)
+            ? message.reactions.filter(r => r !== reaction)
+            : [reaction]
+        }
+        : message
+    ))
+    setShowReactionPopup(null)
+  }
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const newMessage = {
+          id: messages.length + 1,
+          sender: {
+            id: 999,
+            name: 'Tôi',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3'
+          },
+          content: reader.result,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          reactions: [],
+          isRecalled: false,
+          type: 'image',
+          recallTime: null
+        }
+        setMessages([...messages, newMessage])
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
   return (
-    <div className="flex h-[calc(100vh-64px)] bg-gradient-to-br from-blue-50 to-purple-50 mt-16">
+    <div className="fixed inset-0 flex bg-white mt-16">
       {/* Sidebar */}
-      <div className="w-96 bg-white border-r shadow-lg">
-        <div className="p-6 border-b">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Nhóm chat</h1>
-            <button 
-              className="p-3 hover:bg-blue-50 rounded-full transition duration-200"
+      <div className="w-[360px] border-r flex flex-col">
+        <div className="p-4 border-b">
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-2xl font-bold text-gray-800">Chat</h1>
+            <button
+              className="p-2 hover:bg-gray-100 rounded-full"
               onClick={() => setShowCreateGroup(true)}
             >
-              <FaUserPlus className="text-blue-600 text-xl" />
+              <FaUserPlus className="text-gray-600 text-xl" />
             </button>
           </div>
-          
+
           <div className="relative">
-            <FaSearch className="absolute left-4 top-3.5 text-gray-400" />
+            <FaSearch className="absolute left-3 top-3 text-gray-400" />
             <input
               type="text"
-              placeholder="Tìm kiếm nhóm"
-              className="w-full pl-12 pr-4 py-3 bg-gray-50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+              placeholder="Tìm kiếm trong Messenger"
+              className="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-full focus:outline-none"
             />
           </div>
         </div>
 
-        <div className="overflow-y-auto h-[calc(100vh-184px)]">
+        <div className="overflow-y-auto flex-1">
           {groups.map(group => (
-            <div 
-              key={group.id} 
-              className={`p-4 hover:bg-blue-50 cursor-pointer transition duration-200 ${selectedGroup.id === group.id ? 'bg-blue-100' : ''}`}
+            <div
+              key={group.id}
+              className={`p-3 hover:bg-gray-100 cursor-pointer ${selectedGroup?.id === group.id ? 'bg-gray-100' : ''}`}
               onClick={() => setSelectedGroup(group)}
             >
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
                 <div className="relative">
-                  <img 
+                  <img
                     src={group.avatar}
                     alt={group.name}
-                    className="w-14 h-14 rounded-xl object-cover shadow-md"
+                    className="w-14 h-14 rounded-full object-cover"
                   />
                   {group.isOnline && (
-                    <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                    <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
                   )}
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-bold text-gray-800">{group.name}</h3>
-                    <span className="text-xs text-gray-500 font-medium">{group.lastMessageTime}</span>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900">{group.name}</h3>
+                  <div className="flex items-center text-sm text-gray-500">
+                    <p className="truncate">{group.lastMessage}</p>
+                    <span className="mx-1">•</span>
+                    <span>{group.lastMessageTime}</span>
                   </div>
-                  <div className="flex items-center justify-between mt-1">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FaUsers className="mr-2" />
-                      <span>{group.members} thành viên</span>
-                    </div>
-                    {group.unread > 0 && (
-                      <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full px-3 py-1 text-xs font-medium">
-                        {group.unread}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm text-gray-600 truncate mt-1">{group.lastMessage}</p>
                 </div>
+                {group.unread > 0 && (
+                  <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                    {group.unread}
+                  </span>
+                )}
               </div>
             </div>
           ))}
@@ -225,149 +306,183 @@ const Group = () => {
       </div>
 
       {/* Main chat area */}
-      <div className="flex-1 flex flex-col">
-        <div className="p-6 border-b bg-white shadow-sm sticky top-0 z-10">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <img 
-                  src={selectedGroup.avatar}
-                  alt={selectedGroup.name}
-                  className="w-12 h-12 rounded-xl object-cover shadow-md"
-                />
-                {selectedGroup.isOnline && (
-                  <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
-                )}
-              </div>
+      {selectedGroup ? (
+        <div className="flex-1 flex flex-col">
+          <div className="h-16 border-b flex items-center justify-between px-4">
+            <div className="flex items-center space-x-3">
+              <img
+                src={selectedGroup.avatar}
+                alt={selectedGroup.name}
+                className="w-10 h-10 rounded-full"
+              />
               <div>
-                <h2 className="text-xl font-bold text-gray-800">{selectedGroup.name}</h2>
-                <p className="text-sm text-gray-600">{selectedGroup.members} thành viên • {selectedGroup.isOnline ? 'Đang hoạt động' : 'Không hoạt động'}</p>
+                <h2 className="font-semibold">{selectedGroup.name}</h2>
+                <p className="text-sm text-gray-500">
+                  {selectedGroup.isOnline ? 'Đang hoạt động' : 'Không hoạt động'}
+                </p>
               </div>
             </div>
-            <div className="flex items-center space-x-3">
-              <button className="p-3 hover:bg-gray-100 rounded-xl transition duration-200">
-                <FaSearch className="text-gray-600" />
+            <div className="flex items-center space-x-2">
+              <button className="p-2 hover:bg-gray-100 rounded-full">
+                <FaPhone className="text-gray-600" />
               </button>
-              <div className="relative">
-                <button 
-                  className="p-3 hover:bg-gray-100 rounded-xl transition duration-200"
-                  onClick={() => setShowGroupOptions(!showGroupOptions)}
-                >
-                  <FaEllipsisH className="text-gray-600" />
-                </button>
-                {showGroupOptions && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl z-50">
-                    <button 
-                      onClick={handleDeleteGroup}
-                      className="w-full px-4 py-3 text-left text-red-500 hover:bg-red-50 rounded-xl transition duration-200 flex items-center"
-                    >
-                      <FaTrash className="mr-3" />
-                      Xóa nhóm
-                    </button>
-                  </div>
-                )}
-              </div>
+              <button className="p-2 hover:bg-gray-100 rounded-full">
+                <FaVideo className="text-gray-600" />
+              </button>
+              <button 
+                className="p-2 hover:bg-gray-100 rounded-full"
+                onClick={() => setShowGroupOptions(!showGroupOptions)}
+              >
+                <FaEllipsisH className="text-gray-600" />
+              </button>
+              {showGroupOptions && (
+                <div className="absolute right-4 top-16 bg-white rounded-lg shadow-lg py-2">
+                  <button 
+                    onClick={handleDeleteGroup}
+                    className="w-full px-4 py-2 text-left hover:bg-gray-100 text-red-500 flex items-center"
+                  >
+                    <FaTrash className="mr-2" />
+                    Xóa nhóm
+                  </button>
+                </div>
+              )}
             </div>
           </div>
-        </div>
 
-        <div className="flex-1 overflow-y-auto p-6 bg-gradient-to-br from-blue-50 to-purple-50">
-          {messages.map(message => (
-            <div key={message.id} className={`flex mb-6 ${message.sender.id === 999 ? 'justify-end' : 'justify-start'}`}>
-              <div className={`flex ${message.sender.id === 999 ? 'flex-row-reverse' : 'flex-row'} items-end max-w-[70%]`}>
-                <img 
-                  src={message.sender.avatar} 
-                  alt={message.sender.name}
-                  className="w-10 h-10 rounded-xl object-cover shadow-md mx-3"
-                />
-                <div>
-                  <div 
-                    className={`relative px-6 py-3 rounded-2xl shadow-sm ${
-                      message.isRecalled 
-                        ? 'bg-gray-200 italic' 
-                        : message.sender.id === 999 
-                          ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white' 
-                          : 'bg-white'
-                    }`}
-                    onContextMenu={(e) => {
-                      e.preventDefault()
-                      if (message.sender.id === 999 && !message.isRecalled) {
-                        setShowMessageOptions(message.id)
-                      }
-                    }}
-                  >
-                    <p className="text-[15px] leading-relaxed">{message.isRecalled ? 'Tin nhắn đã bị thu hồi' : message.content}</p>
-                    
-                    {showMessageOptions === message.id && message.sender.id === 999 && !message.isRecalled && (
-                      <div className="absolute right-0 bottom-full mb-2 w-48 bg-white rounded-xl shadow-xl z-50">
-                        <button 
-                          onClick={() => handleRecallMessage(message.id)}
-                          className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-50 rounded-xl transition duration-200 flex items-center"
-                        >
-                          <FaUndoAlt className="mr-3" />
-                          Thu hồi tin nhắn
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                  <div className={`flex items-center mt-2 text-xs text-gray-500 ${message.sender.id === 999 ? 'justify-end' : 'justify-start'}`}>
-                    <span>{message.timestamp}</span>
-                    {message.reactions.length > 0 && !message.isRecalled && (
-                      <div className="flex ml-3">
-                        {message.reactions.map((reaction, index) => (
-                          <span key={index} className="ml-1 text-base">{reaction}</span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+          <div className="flex-1 overflow-y-auto p-4 bg-gray-100">
+            {messages.map(message => (
+              <div key={message.id} className={`flex mb-4 ${message.sender.id === 999 ? 'justify-end' : 'justify-start'}`}>
+                {message.sender.id !== 999 && (
+                  <img
+                    src={message.sender.avatar}
+                    alt={message.sender.name}
+                    className="w-8 h-8 rounded-full mr-2"
+                  />
+                )}
+                <div className="relative group">
+                  {message.type === 'text' ? (
+                    <div
+                      className={`px-4 py-2 rounded-2xl max-w-[300px] ${message.isRecalled
+                          ? 'bg-gray-200 italic'
+                          : message.sender.id === 999
+                            ? 'bg-blue-500 text-white'
+                            : 'bg-white'
+                        }`}
+                      onMouseEnter={() => setShowReactionPopup(message.id)}
+                      onMouseLeave={() => setShowReactionPopup(null)}
+                    >
+                      <p className="break-words">{message.content}</p>
+                      {message.isRecalled && (
+                        <span className="text-xs text-gray-500">
+                          • Thu hồi lúc {message.recallTime}
+                        </span>
+                      )}
+
+                      {message.sender.id === 999 && !message.isRecalled && (
+                        <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100">
+                          <button
+                            onClick={() => setShowMessageOptions(message.id)}
+                            className="p-1 hover:bg-gray-100 rounded"
+                          >
+                            <FaEllipsisH className="text-gray-600" />
+                          </button>
+                          {showMessageOptions === message.id && (
+                            <div className="absolute right-0 top-6 bg-white rounded shadow-lg py-1">
+                              <button
+                                onClick={() => handleRecallMessage(message.id)}
+                                className="w-full px-3 py-1 text-left hover:bg-gray-100 flex items-center"
+                              >
+                                <FaUndoAlt className="mr-2" />
+                                Thu hồi
+                              </button>
+                              <button
+                                onClick={() => handleDeleteMessage(message.id)}
+                                className="w-full px-3 py-1 text-left hover:bg-gray-100 text-red-500 flex items-center"
+                              >
+                                <FaTrash className="mr-2" />
+                                Xóa
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="max-w-[300px] rounded-lg overflow-hidden">
+                      <img
+                        src={message.content}
+                        alt="Uploaded"
+                        className="w-full h-auto"
+                      />
+                    </div>
+                  )}
+
+                  {message.reactions.length > 0 && !message.isRecalled && (
+                    <div className="absolute -bottom-2 right-0 bg-white rounded-full px-2 py-1 shadow-sm">
+                      {message.reactions.map((reaction, index) => (
+                        <span key={index} className="text-sm">{reaction}</span>
+                      ))}
+                    </div>
+                  )}
+
+                  <span className="text-xs text-gray-500 mt-1 block">
+                    {message.timestamp}
+                  </span>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="p-6 bg-white border-t shadow-lg">
-          <div className="flex items-center space-x-4">
-            <button className="p-3 hover:bg-blue-50 rounded-xl transition duration-200">
-              <FaImage className="text-blue-500 text-xl" />
-            </button>
-            <button className="p-3 hover:bg-yellow-50 rounded-xl transition duration-200">
-              <FaSmile className="text-yellow-500 text-xl" />
-            </button>
-            <input
-              type="text"
-              value={messageInput}
-              onChange={(e) => setMessageInput(e.target.value)}
-              placeholder="Nhập tin nhắn..."
-              className="flex-1 p-4 bg-gray-50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-            />
-            {messageInput ? (
-              <button 
-                onClick={handleSendMessage}
-                className="p-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:opacity-90 transition duration-200"
+          <div className="p-4 border-t bg-white">
+            <div className="flex items-center space-x-2">
+              <button className="p-2 hover:bg-gray-100 rounded-full">
+                <FaPlus className="text-gray-600" />
+              </button>
+              <label className="p-2 hover:bg-gray-100 rounded-full cursor-pointer">
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleImageUpload}
+                />
+                <FaImage className="text-gray-600" />
+              </label>
+              <button
+                className="p-2 hover:bg-gray-100 rounded-full"
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
               >
-                <FaPaperPlane />
+                <FaSmile className="text-gray-600" />
               </button>
-            ) : (
-              <button className="p-4 hover:bg-blue-50 rounded-xl transition duration-200">
-                <FaThumbsUp className="text-blue-500 text-xl" />
+              <input
+                type="text"
+                value={messageInput}
+                onChange={(e) => setMessageInput(e.target.value)}
+                placeholder="Aa"
+                className="flex-1 px-4 py-2 bg-gray-100 rounded-full focus:outline-none"
+                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              />
+              <button
+                onClick={() => messageInput ? handleSendMessage() : handleSendMessage(true)}
+                className="p-2 hover:bg-gray-100 rounded-full"
+              >
+                {messageInput ? <FaPaperPlane className="text-blue-500" /> : <FaThumbsUp className="text-blue-500" />}
               </button>
-            )}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="flex-1 flex items-center justify-center">
+          <p className="text-gray-500">Chọn một nhóm để bắt đầu trò chuyện</p>
+        </div>
+      )}
 
-      {/* Modal tạo nhóm mới */}
+      {/* Create group modal */}
       {showCreateGroup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-[550px] p-8 shadow-2xl">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Tạo nhóm mới</h2>
-              <button 
-                onClick={() => setShowCreateGroup(false)}
-                className="p-2 hover:bg-gray-100 rounded-xl transition duration-200"
-              >
+          <div className="bg-white rounded-lg w-[400px] p-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Tạo nhóm mới</h2>
+              <button onClick={() => setShowCreateGroup(false)}>
                 <FaTimes />
               </button>
             </div>
@@ -377,81 +492,65 @@ const Group = () => {
               placeholder="Tên nhóm"
               value={newGroupName}
               onChange={(e) => setNewGroupName(e.target.value)}
-              className="w-full p-4 mb-6 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+              className="w-full p-2 border rounded mb-4"
             />
 
-            <div className="mb-6">
-              <div className="flex flex-wrap gap-2 mb-4">
-                {selectedMembers.map(member => (
-                  <div key={member.id} className="flex items-center bg-blue-100 rounded-xl px-4 py-2">
-                    <img 
-                      src={member.avatar}
-                      alt={member.name}
-                      className="w-8 h-8 rounded-lg object-cover shadow-sm mr-2"
-                    />
-                    <span className="text-sm font-medium">{member.name}</span>
-                    <button 
-                      onClick={() => handleRemoveMember(member.id)}
-                      className="ml-2 text-gray-500 hover:text-gray-700 transition duration-200"
-                    >
-                      <FaTimes size={12} />
-                    </button>
-                  </div>
-                ))}
-              </div>
-
+            <div className="mb-4">
               <input
                 type="text"
                 placeholder="Tìm kiếm thành viên"
                 value={searchMember}
                 onChange={(e) => setSearchMember(e.target.value)}
-                className="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                className="w-full p-2 border rounded mb-2"
               />
+
+              <div className="max-h-48 overflow-y-auto">
+                {availableMembers
+                  .filter(member =>
+                    !selectedMembers.find(m => m.id === member.id) &&
+                    member.name.toLowerCase().includes(searchMember.toLowerCase())
+                  )
+                  .map(member => (
+                    <div
+                      key={member.id}
+                      onClick={() => handleSelectMember(member)}
+                      className="flex items-center p-2 hover:bg-gray-100 cursor-pointer"
+                    >
+                      <img
+                        src={member.avatar}
+                        alt={member.name}
+                        className="w-8 h-8 rounded-full mr-2"
+                      />
+                      <span>{member.name}</span>
+                    </div>
+                  ))
+                }
+              </div>
             </div>
 
-            <div className="max-h-48 overflow-y-auto mb-6">
-              {availableMembers
-                .filter(member => 
-                  !selectedMembers.find(m => m.id === member.id) &&
-                  member.name.toLowerCase().includes(searchMember.toLowerCase())
-                )
-                .map(member => (
-                  <div 
-                    key={member.id}
-                    onClick={() => handleSelectMember(member)}
-                    className="flex items-center p-3 hover:bg-blue-50 cursor-pointer rounded-xl transition duration-200"
-                  >
-                    <img 
-                      src={member.avatar}
-                      alt={member.name}
-                      className="w-12 h-12 rounded-lg object-cover shadow-sm mr-4"
-                    />
-                    <span className="font-medium">{member.name}</span>
-                  </div>
-                ))
-              }
-            </div>
-
-            <div className="flex justify-end space-x-4">
+            <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setShowCreateGroup(false)}
-                className="px-6 py-3 text-gray-600 hover:bg-gray-100 rounded-xl transition duration-200"
+                className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded"
               >
                 Hủy
               </button>
               <button
                 onClick={handleCreateGroup}
-                disabled={!newGroupName.trim() || selectedMembers.length < 3}
-                className={`px-6 py-3 text-white rounded-xl transition duration-200 ${
-                  !newGroupName.trim() || selectedMembers.length < 3
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90'
-                }`}
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                disabled={!newGroupName.trim() || selectedMembers.length < 2}
               >
                 Tạo nhóm
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Delete Alert */}
+      {showDeleteAlert && (
+        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
+          Nhóm đã được xóa thành công!
         </div>
       )}
     </div>
