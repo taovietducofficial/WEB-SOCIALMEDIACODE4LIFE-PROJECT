@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaUsers, FaUserPlus, FaSearch, FaEllipsisH, FaImage, FaSmile, FaThumbsUp, FaPaperPlane, FaTimes, FaTrash } from 'react-icons/fa'
+import { FaUsers, FaUserPlus, FaSearch, FaEllipsisH, FaImage, FaSmile, FaThumbsUp, FaPaperPlane, FaTimes, FaTrash, FaUndoAlt } from 'react-icons/fa'
 
 const Group = () => {
   const [groups, setGroups] = useState([
@@ -35,7 +35,8 @@ const Group = () => {
       },
       content: 'Xin chào mọi người!',
       timestamp: '12:25',
-      reactions: ['👍', '❤️']
+      reactions: ['👍', '❤️'],
+      isRecalled: false
     },
     {
       id: 2, 
@@ -46,7 +47,8 @@ const Group = () => {
       },
       content: 'Chào bạn!',
       timestamp: '12:26',
-      reactions: []
+      reactions: [],
+      isRecalled: false
     }
   ])
 
@@ -57,6 +59,7 @@ const Group = () => {
   const [selectedMembers, setSelectedMembers] = useState([])
   const [searchMember, setSearchMember] = useState('')
   const [showGroupOptions, setShowGroupOptions] = useState(false)
+  const [showMessageOptions, setShowMessageOptions] = useState(null)
 
   // Danh sách người dùng mẫu để chọn thành viên
   const [availableMembers] = useState([
@@ -130,7 +133,8 @@ const Group = () => {
       },
       content: messageInput,
       timestamp: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
-      reactions: []
+      reactions: [],
+      isRecalled: false
     }
 
     setMessages([...messages, newMessage])
@@ -143,6 +147,17 @@ const Group = () => {
       setGroups(newGroups)
       setSelectedGroup(newGroups[0] || null)
       setShowGroupOptions(false)
+    }
+  }
+
+  const handleRecallMessage = (messageId) => {
+    if (window.confirm('Bạn có chắc chắn muốn thu hồi tin nhắn này?')) {
+      setMessages(messages.map(message => 
+        message.id === messageId 
+          ? {...message, isRecalled: true}
+          : message
+      ))
+      setShowMessageOptions(null)
     }
   }
 
@@ -270,12 +285,38 @@ const Group = () => {
                   className="w-8 h-8 rounded-full mx-2"
                 />
                 <div>
-                  <div className={`px-4 py-2 rounded-2xl ${message.sender.id === 999 ? 'bg-blue-500 text-white' : 'bg-white'}`}>
-                    <p>{message.content}</p>
+                  <div 
+                    className={`relative px-4 py-2 rounded-2xl ${
+                      message.isRecalled 
+                        ? 'bg-gray-200 italic' 
+                        : message.sender.id === 999 
+                          ? 'bg-blue-500 text-white' 
+                          : 'bg-white'
+                    }`}
+                    onContextMenu={(e) => {
+                      e.preventDefault()
+                      if (message.sender.id === 999 && !message.isRecalled) {
+                        setShowMessageOptions(message.id)
+                      }
+                    }}
+                  >
+                    <p>{message.isRecalled ? 'Tin nhắn đã bị thu hồi' : message.content}</p>
+                    
+                    {showMessageOptions === message.id && message.sender.id === 999 && !message.isRecalled && (
+                      <div className="absolute right-0 bottom-full mb-2 w-48 bg-white rounded-lg shadow-lg z-50">
+                        <button 
+                          onClick={() => handleRecallMessage(message.id)}
+                          className="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100 rounded-lg flex items-center"
+                        >
+                          <FaUndoAlt className="mr-2" />
+                          Thu hồi tin nhắn
+                        </button>
+                      </div>
+                    )}
                   </div>
                   <div className={`flex items-center mt-1 text-xs text-gray-500 ${message.sender.id === 999 ? 'justify-end' : 'justify-start'}`}>
                     <span>{message.timestamp}</span>
-                    {message.reactions.length > 0 && (
+                    {message.reactions.length > 0 && !message.isRecalled && (
                       <div className="flex ml-2">
                         {message.reactions.map((reaction, index) => (
                           <span key={index} className="ml-0.5">{reaction}</span>
