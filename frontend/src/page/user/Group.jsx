@@ -387,20 +387,12 @@ const Group = () => {
                             <FaEllipsisH className="text-gray-600" />
                           </button>
                           {showMessageOptions === message.id && (
-                            <div className="absolute right-0 top-6 bg-white rounded shadow-lg py-1">
+                            <div className="absolute right-0 bottom-6 bg-white rounded shadow-lg py-1 flex flex-row">
                               <button
                                 onClick={() => handleRecallMessage(message.id)}
-                                className="w-full px-3 py-1 text-left hover:bg-gray-100 flex items-center"
+                                className="w-full px-3 py-1 text-left hover:bg-gray-100 flex items-center text-black"
                               >
-                                <FaUndoAlt className="mr-2" />
                                 Thu hồi
-                              </button>
-                              <button
-                                onClick={() => handleDeleteMessage(message.id)}
-                                className="w-full px-3 py-1 text-left hover:bg-gray-100 text-red-500 flex items-center"
-                              >
-                                <FaTrash className="mr-2" />
-                                Xóa
                               </button>
                             </div>
                           )}
