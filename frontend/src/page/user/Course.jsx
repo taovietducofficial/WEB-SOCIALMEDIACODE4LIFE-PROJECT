@@ -1,39 +1,18 @@
-import React, { useState } from 'react'
-import { FaCode, FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaClock, FaTrash, FaPlus } from 'react-icons/fa'
+import React, { useState, useEffect } from 'react'
+import { FaCode, FaReact, FaNodeJs, FaPython, FaDatabase, FaClock, FaTrash, FaPlus } from 'react-icons/fa'
+import { C_Course } from '../../api/user/C_Course'
+import { CRUD_Post } from '../../api/user/CRUD_Post'
 
 const Course = () => {
-  const [courses, setCourses] = useState([
-    {
-      id: 1,
-      title: 'Lập trình React.js',
-      instructor: 'Nguyễn Văn A',
-      level: 'Trung cấp',
-      duration: '30 giờ',
-      price: '999.000đ',
-      icon: <FaReact className="text-blue-500" />,
-      description: 'Học cách xây dựng ứng dụng web hiện đại với React.js'
-    },
-    {
-      id: 2, 
-      title: 'Node.js Backend',
-      instructor: 'Trần Văn B',
-      level: 'Nâng cao',
-      duration: '40 giờ',
-      price: '1.299.000đ',
-      icon: <FaNodeJs className="text-green-600" />,
-      description: 'Phát triển REST API và backend với Node.js'
-    },
-    {
-      id: 3,
-      title: 'Python cơ bản',
-      instructor: 'Lê Thị C',
-      level: 'Cơ bản',
-      duration: '25 giờ', 
-      price: '799.000đ',
-      icon: <FaPython className="text-yellow-500" />,
-      description: 'Làm quen với ngôn ngữ lập trình Python'
+  const [courses, setCourses] = useState([])
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const data = await C_Course()
+      setCourses(data)
     }
-  ])
+    fetchCourses()
+  }, [])
 
   const [showAddForm, setShowAddForm] = useState(false)
   const [newCourse, setNewCourse] = useState({
@@ -45,33 +24,81 @@ const Course = () => {
     description: ''
   })
 
-  const handleAddCourse = () => {
+  const handleAddCourse = async () => {
     if (!newCourse.title || !newCourse.instructor || !newCourse.level || !newCourse.duration || !newCourse.price || !newCourse.description) {
       alert('Vui lòng điền đầy đủ thông tin')
       return
     }
 
-    const course = {
-      id: courses.length + 1,
-      ...newCourse,
-      icon: <FaCode className="text-gray-500" />
-    }
+    try {
+      // Tạo object data để gửi xuống API
+      const courseData = {
+        title: newCourse.title,
+        instructor: newCourse.instructor,
+        level: newCourse.level,
+        duration: newCourse.duration,
+        price: newCourse.price,
+        description: newCourse.description
+      }
 
-    setCourses([...courses, course])
-    setNewCourse({
-      title: '',
-      instructor: '',
-      level: '',
-      duration: '',
-      price: '',
-      description: ''
-    })
-    setShowAddForm(false)
+      // Gọi API để lưu khóa học mới
+      const response = await fetch('http://localhost:8081/api/courses', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(courseData)
+      })
+
+      if (response.ok) {
+        const savedCourse = await response.json()
+        
+        // Thêm icon vào course mới
+        const courseWithIcon = {
+          ...savedCourse,
+          icon: <FaCode className="text-gray-500" />
+        }
+
+        // Cập nhật state
+        setCourses([...courses, courseWithIcon])
+        
+        // Reset form
+        setNewCourse({
+          title: '',
+          instructor: '',
+          level: '',
+          duration: '',
+          price: '',
+          description: ''
+        })
+        setShowAddForm(false)
+        alert('Yêu cầu mở lớp thành công!')
+      } else {
+        throw new Error('Lỗi khi thêm khóa học')
+      }
+    } catch (error) {
+      console.error('Lỗi khi thêm khóa học:', error)
+      alert('Có lỗi xảy ra khi yêu cầu mở lớp. Vui lòng thử lại!')
+    }
   }
 
-  const handleDeleteCourse = (id) => {
+  const handleDeleteCourse = async (id) => {
     if (window.confirm('Bạn có chắc chắn muốn xóa khóa học này?')) {
-      setCourses(courses.filter(course => course.id !== id))
+      try {
+        const response = await fetch(`http://localhost:8081/api/courses/${id}`, {
+          method: 'DELETE'
+        })
+
+        if (response.ok) {
+          setCourses(courses.filter(course => course.id !== id))
+          alert('Xóa khóa học thành công!')
+        } else {
+          throw new Error('Lỗi khi xóa khóa học')
+        }
+      } catch (error) {
+        console.error('Lỗi khi xóa khóa học:', error)
+        alert('Có lỗi xảy ra khi xóa khóa học. Vui lòng thử lại!')
+      }
     }
   }
 
