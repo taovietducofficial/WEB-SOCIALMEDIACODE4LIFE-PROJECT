@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FaUsers, FaComments, FaBell, FaUserFriends, FaGraduationCap, FaUser, FaDatabase, FaChartBar } from 'react-icons/fa'
-import { ReadAllUser } from '../../api/admin/ReadAllUser'
+import { CRUD_User } from '../../api/admin/CRUD_User'
 
 const DashboardAD = () => {
   const [activeTab, setActiveTab] = useState('posts')
@@ -19,7 +19,7 @@ const DashboardAD = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       if (activeTab === 'users') {
-        const data = await ReadAllUser()
+        const data = await CRUD_User()
         setUsers(data)
       }
     }
