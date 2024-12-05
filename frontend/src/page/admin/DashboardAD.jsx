@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FaUsers, FaComments, FaBell, FaUserFriends, FaGraduationCap, FaUser, FaDatabase, FaChartBar } from 'react-icons/fa'
-import { CRUD_User } from '../../api/admin/CRUD_User'
+import { CRUD_User, CRUD_User_By_Id } from '../../api/admin/CRUD_User'
 
 const DashboardAD = () => {
   const [activeTab, setActiveTab] = useState('posts')
@@ -25,6 +25,17 @@ const DashboardAD = () => {
     }
     fetchUsers()
   }, [activeTab])
+
+  const handleDeleteUser = async (id) => {
+    try {
+      await CRUD_User_By_Id(id)
+      // Sau khi xóa thành công, cập nhật lại danh sách users
+      const updatedUsers = users.filter(user => user.id !== id)
+      setUsers(updatedUsers)
+    } catch (error) {
+      console.error('Lỗi khi xóa người dùng:', error)
+    }
+  }
 
   const renderContent = () => {
     switch(activeTab) {
@@ -84,7 +95,16 @@ const DashboardAD = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-center">{user.username}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-center">{user.email}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-center">
-                        <button className="text-red-600 hover:text-red-900">Xóa</button>
+                        <button 
+                          className="text-red-600 hover:text-red-900"
+                          onClick={() => {
+                            if(window.confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
+                              handleDeleteUser(user.id)
+                            }
+                          }}
+                        >
+                          Xóa
+                        </button>
                       </td>
                     </tr>
                   ))}

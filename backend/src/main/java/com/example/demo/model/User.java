@@ -1,21 +1,25 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
 package com.example.demo.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "users") // MongoDB collection name
+@Document(
+        collection = "users"
+)
 public class User {
-
-    private String id; // MongoDB uses String as the default type for _id
-
+    private String id;
     private String username;
     private String password;
     private String email;
     private LocalDateTime createdAt;
     private Boolean isActive;
+    private LocalDateTime deletedAt;
+    private Boolean isDeleted;
 
-    // Constructors, Getters, Setters
-    public User() {}
+    public User() {
+        this.isDeleted = false;
+    }
 
     public User(String username, String password, String email) {
         this.username = username;
@@ -23,10 +27,11 @@ public class User {
         this.email = email;
         this.createdAt = LocalDateTime.now();
         this.isActive = true;
+        this.isDeleted = false;
     }
 
     public String getId() {
-        return id; // MongoDB will automatically generate the id
+        return this.id;
     }
 
     public void setId(String id) {
@@ -34,7 +39,7 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -42,7 +47,7 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -50,7 +55,7 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -58,7 +63,7 @@ public class User {
     }
 
     public LocalDateTime getCreatedAt() {
-        return createdAt;
+        return this.createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
@@ -66,10 +71,32 @@ public class User {
     }
 
     public Boolean getIsActive() {
-        return isActive;
+        return this.isActive;
     }
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return this.deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    public Boolean getIsDeleted() {
+        return this.isDeleted;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public void delete() {
+        this.isDeleted = true;
+        this.deletedAt = LocalDateTime.now();
+        this.isActive = false;
     }
 }
