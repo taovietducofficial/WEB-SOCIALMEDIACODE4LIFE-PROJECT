@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaUsers, FaComments, FaBell, FaUserFriends, FaGraduationCap, FaUser, FaDatabase, FaChartBar } from 'react-icons/fa'
+import { ReadAllUser } from '../../api/admin/ReadAllUser'
 
 const DashboardAD = () => {
   const [activeTab, setActiveTab] = useState('posts')
@@ -13,6 +14,17 @@ const DashboardAD = () => {
     totalCourses: 95,
     totalMessages: 25000
   })
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      if (activeTab === 'users') {
+        const data = await ReadAllUser()
+        setUsers(data)
+      }
+    }
+    fetchUsers()
+  }, [activeTab])
 
   const renderContent = () => {
     switch(activeTab) {
@@ -55,7 +67,30 @@ const DashboardAD = () => {
         return (
           <div className="bg-white rounded-lg p-6">
             <h2 className="text-xl font-bold mb-4">Quản lý người dùng</h2>
-            {/* Bảng quản lý người dùng */}
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Tên</th>
+                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {users.map((user) => (
+                    <tr key={user.id}>
+                      <td className="px-6 py-4 whitespace-nowrap text-center">{user.id}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center">{user.username}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center">{user.email}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <button className="text-red-600 hover:text-red-900">Xóa</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )
       case 'backup':
