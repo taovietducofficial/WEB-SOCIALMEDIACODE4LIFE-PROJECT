@@ -1,47 +1,66 @@
-// Source code is decompiled from a .class file using FernFlower decompiler.
 package com.example.demo.controller;
 
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
-import java.util.List;
+import com.example.demo.service.AuthService;
+import com.example.demo.util.JwtUtil;
+import com.example.demo.dto.SignupRequest;
+import com.example.demo.dto.LoginRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@CrossOrigin(
-        origins = {"http://localhost:1903"}
-)
-@RequestMapping({"/api/auth"})
-class AuthController {
+@CrossOrigin(origins = "http://localhost:1903")
+@RequestMapping("/api/auth")
+public class AuthController {
     private final UserService userService;
+    private final AuthService authService;
+    private final JwtUtil jwtUtil;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, AuthService authService, JwtUtil jwtUtil) {
         this.userService = userService;
+        this.authService = authService;
+        this.jwtUtil = jwtUtil;
     }
 
-    @GetMapping({"/users"})
+    @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
-        List<User> users = this.userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
         if (users.isEmpty()) {
-            System.out.println("No users found in the database");
+            return ResponseEntity.noContent().build(); // Trả về HTTP 204 nếu không có user
         }
-
         return ResponseEntity.ok(users);
     }
 
-    @DeleteMapping({"/users/{id}"})
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody SignupRequest signupRequest) {
+        try {
+            authService.signup(signupRequest.getUsername(), signupRequest.getPassword(), signupRequest.getEmail());
+            return ResponseEntity.ok("User registered successfully!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body("Signup failed: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        try {
+            User user = authService.login(loginRequest.getUsername(), loginRequest.getPassword());
+            String token = jwtUtil.generateToken(user.getUsername());
+            return ResponseEntity.ok().body("Bearer " + token); // Trả token kèm "Bearer" để sử dụng
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body("Login failed: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable String id) {
         try {
-            System.out.println("Received request to delete user with ID: " + id); // Log ID
-            this.userService.deleteUser(id);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage()); // Log lỗi chi tiết
+            userService.deleteUser(id);
+            return ResponseEntity.ok("User deleted successfully!");
+        } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body("Error deleting user: " + e.getMessage());
         }
     }

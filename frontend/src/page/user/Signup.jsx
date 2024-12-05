@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { C_Account } from '../../api/user/C_Account'
 
 const Signup = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    username: '',
     email: '',
-    password: '',
-    birthDate: '',
-    gender: ''
+    password: ''
   })
 
   const handleChange = (e) => {
@@ -23,24 +21,13 @@ const Signup = () => {
     e.preventDefault()
     
     try {
-      const response = await fetch('http://localhost:3001/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
-
-      if (response.ok) {
-        alert('Đăng ký thành công!')
+      const response = await C_Account(formData)
+      
+      if (response.status === 'success') {
         navigate('/login')
-      } else {
-        const data = await response.json()
-        alert(data.message || 'Đăng ký thất bại')
       }
     } catch (error) {
       console.error('Error:', error)
-      alert('Có lỗi xảy ra khi đăng ký')
     }
   }
 
@@ -61,23 +48,14 @@ const Signup = () => {
         {/* Signup Form */}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
-            <div className="flex gap-4">
+            <div>
               <input
                 type="text"
-                name="firstName"
+                name="username"
                 required
                 className="appearance-none rounded-lg relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Họ"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="lastName"
-                required
-                className="appearance-none rounded-lg relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Tên"
-                value={formData.lastName}
+                placeholder="Tên đăng nhập"
+                value={formData.username}
                 onChange={handleChange}
               />
             </div>
@@ -87,7 +65,7 @@ const Signup = () => {
                 name="email"
                 required
                 className="appearance-none rounded-lg relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Email hoặc số điện thoại"
+                placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
               />
@@ -98,59 +76,10 @@ const Signup = () => {
                 name="password"
                 required
                 className="appearance-none rounded-lg relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Mật khẩu mới"
+                placeholder="Mật khẩu"
                 value={formData.password}
                 onChange={handleChange}
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Ngày sinh</label>
-              <input
-                type="date"
-                name="birthDate"
-                required
-                className="appearance-none rounded-lg relative block w-full px-3 py-3 border border-gray-300 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                value={formData.birthDate}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Giới tính</label>
-              <div className="flex gap-4">
-                <label className="flex-1 flex items-center justify-between p-3 border rounded-lg cursor-pointer hover:border-blue-500">
-                  <span>Nam</span>
-                  <input 
-                    type="radio" 
-                    name="gender" 
-                    value="male" 
-                    className="text-blue-600"
-                    checked={formData.gender === 'male'}
-                    onChange={handleChange}
-                  />
-                </label>
-                <label className="flex-1 flex items-center justify-between p-3 border rounded-lg cursor-pointer hover:border-blue-500">
-                  <span>Nữ</span>
-                  <input 
-                    type="radio" 
-                    name="gender" 
-                    value="female" 
-                    className="text-blue-600"
-                    checked={formData.gender === 'female'}
-                    onChange={handleChange}
-                  />
-                </label>
-                <label className="flex-1 flex items-center justify-between p-3 border rounded-lg cursor-pointer hover:border-blue-500">
-                  <span>Khác</span>
-                  <input 
-                    type="radio" 
-                    name="gender" 
-                    value="other" 
-                    className="text-blue-600"
-                    checked={formData.gender === 'other'}
-                    onChange={handleChange}
-                  />
-                </label>
-              </div>
             </div>
           </div>
 

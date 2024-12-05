@@ -4,33 +4,20 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class UserRegistrationDTO {
+public class SignupRequest {
     @NotBlank
     @Size(min = 4, max = 20, message = "Username must be between 4 and 20 characters.")
     private String username;
 
     @NotBlank
-    @Size(min = 6, message = "Password must be at least 6 characters long.")
+    @Size(min = 6, message = "Password must be at least 6 characters.")
     private String password;
 
     @NotBlank
     @Email(message = "Email must be valid.")
     private String email;
 
-    private String id; // ID để lưu lại nếu cần dùng cho MongoDB
-
-    // Constructor không tham số
-    public UserRegistrationDTO() {}
-
-    // Constructor đầy đủ tham số
-    public UserRegistrationDTO(String username, String password, String email, String id) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.id = id;
-    }
-
-    // Getter và Setter
+    // Getters and Setters
     public String getUsername() {
         return username;
     }
@@ -53,13 +40,5 @@ public class UserRegistrationDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }

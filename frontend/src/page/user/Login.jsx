@@ -2,45 +2,62 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    if (!username || !password) {
+      alert('Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu')
+      return
+    }
+
+    if (username.length < 3 || !/^[a-zA-Z0-9]+$/.test(username)) {
+      alert('Tên đăng nhập phải có ít nhất 3 ký tự và không chứa ký tự đặc biệt')
+      return
+    }
+
+    if (password.length < 6) {
+      alert('Mật khẩu phải có ít nhất 6 ký tự')
+      return
+    }
+  
     try {
-      const response = await fetch('http://localhost:8080/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      })
+      // Hardcoded credentials
+      const validAccounts = [
+        { username: 'taovietduc193', password: '1234567' },
+        { username: 'taovietduc194', password: '1234567' },
+        { username: 'taovietduc195', password: '1234567' },
+        { username: 'taovietduc196', password: '1234567' },
+        { username: 'taovietduc197', password: '1234567' },
+        { username: 'taovietduc198', password: '1234567' },
+        { username: 'taovietduc199', password: '1234567' },
+        { username: 'taovietduc200', password: '1234567' },
+        { username: 'taovietduc201', password: '1234567' },
+        { username: 'taovietduc202', password: '1234567' }
+      ]
 
-      const data = await response.json()
+      const isValidLogin = validAccounts.some(
+        account => account.username === username && account.password === password
+      )
 
-      if (response.ok) {
-        // Lưu token vào localStorage
-        localStorage.setItem('token', data.token)
-        // Chuyển hướng đến trang chủ
-        navigate('/')
+      if (isValidLogin) {
+        // Login successful
+        navigate('/user/home')
       } else {
-        alert(data.message || 'Đăng nhập thất bại')
+        alert('Tên đăng nhập hoặc mật khẩu không đúng!')
       }
     } catch (error) {
-      console.error('Lỗi:', error)
-      alert('Có lỗi xảy ra khi đăng nhập')
+      console.error('Lỗi đăng nhập:', error)
+      alert('Lỗi kết nối máy chủ! Vui lòng thử lại sau.')
     }
   }
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-        {/* Logo and Title */}
         <div>
           <h1 className="text-center text-4xl font-bold text-blue-600">Code4Life</h1>
           <h2 className="mt-6 text-center text-2xl font-bold text-gray-900">
@@ -51,25 +68,24 @@ const Login = () => {
           </p>
         </div>
 
-        {/* Login Form */}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="rounded-md shadow-sm space-y-4">
             <div>
               <input
-                type="email"
+                type="text"
                 required
-                className="appearance-none rounded-t-lg relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10"
-                placeholder="Email hoặc số điện thoại"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                className="appearance-none rounded-lg relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Tên đăng nhập"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div>
               <input
                 type="password"
                 required
-                className="appearance-none rounded-b-lg relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10"
-                placeholder="Mật khẩu"
+                className="appearance-none rounded-lg relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Mật khẩu" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

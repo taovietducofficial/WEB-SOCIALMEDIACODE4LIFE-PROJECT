@@ -99,4 +99,5 @@ public class User {
         this.deletedAt = LocalDateTime.now();
         this.isActive = false;
     }
+
 }
