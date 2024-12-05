@@ -3,7 +3,10 @@ import { FaUsers, FaComments, FaBell, FaUserFriends, FaGraduationCap, FaUser, Fa
 import { CRUD_User, CRUD_User_By_Id } from '../../api/admin/CRUD_User'
 
 const DashboardAD = () => {
-  const [activeTab, setActiveTab] = useState('posts')
+  // Lấy giá trị tab từ localStorage hoặc mặc định là 'posts'
+  const [activeTab, setActiveTab] = useState(() => {
+    return localStorage.getItem('activeTab') || 'posts'
+  })
 
   const [stats] = useState({
     totalUsers: 1250,
@@ -15,6 +18,11 @@ const DashboardAD = () => {
     totalMessages: 25000
   })
   const [users, setUsers] = useState([])
+
+  // Lưu activeTab vào localStorage mỗi khi nó thay đổi
+  useEffect(() => {
+    localStorage.setItem('activeTab', activeTab)
+  }, [activeTab])
 
   useEffect(() => {
     const fetchUsers = async () => {
