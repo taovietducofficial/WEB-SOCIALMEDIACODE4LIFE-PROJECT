@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaUsers, FaUserPlus, FaSearch, FaEllipsisH, FaImage, FaSmile, FaThumbsUp, FaPaperPlane, FaTimes, FaTrash, FaUndoAlt, FaPhone, FaVideo, FaInfoCircle, FaPlus } from 'react-icons/fa'
 
 const Group = () => {
@@ -73,6 +73,19 @@ const Group = () => {
     { id: 4, name: 'Phạm Thị D', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3' },
     { id: 5, name: 'Hoàng Văn E', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3' }
   ])
+
+  // Load messages from localStorage on component mount
+  useEffect(() => {
+    const savedMessages = localStorage.getItem('chatMessages')
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages))
+    }
+  }, [])
+
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('chatMessages', JSON.stringify(messages))
+  }, [messages])
 
   const handleCreateGroup = () => {
     if (!newGroupName.trim() || selectedMembers.length < 2) {

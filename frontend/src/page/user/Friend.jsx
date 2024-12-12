@@ -11,7 +11,115 @@ const Friend = () => {
     },
     {
       id: 2,
-      name: 'Trần Thị B', 
+      name: 'Trần Thị B',
+      avatar: 'https://via.placeholder.com/48', 
+      mutualFriends: 3
+    },
+    {
+      id: 3,
+      name: 'Lê Văn C',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 7
+    },
+    {
+      id: 4,
+      name: 'Phạm Thị D',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 4
+    },
+    {
+      id: 5,
+      name: 'Hoàng Văn E',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 6
+    },
+    {
+      id: 6,
+      name: 'Vũ Thị F',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 8
+    },
+    {
+      id: 7,
+      name: 'Đặng Văn G',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 3
+    },
+    {
+      id: 8,
+      name: 'Trương Thị H',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 5
+    },
+    {
+      id: 9,
+      name: 'Mai Văn I',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 7
+    },
+    {
+      id: 10,
+      name: 'Lý Thị J',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 4
+    },
+    {
+      id: 11,
+      name: 'Đinh Văn K',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 6
+    },
+    {
+      id: 12,
+      name: 'Bùi Thị L',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 8
+    },
+    {
+      id: 13,
+      name: 'Ngô Văn M',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 5
+    },
+    {
+      id: 14,
+      name: 'Dương Thị N',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 3
+    },
+    {
+      id: 15,
+      name: 'Phan Văn O',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 7
+    },
+    {
+      id: 16,
+      name: 'Võ Thị P',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 4
+    },
+    {
+      id: 17,
+      name: 'Đỗ Văn Q',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 6
+    },
+    {
+      id: 18,
+      name: 'Hồ Thị R',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 8
+    },
+    {
+      id: 19,
+      name: 'Trịnh Văn S',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 5
+    },
+    {
+      id: 20,
+      name: 'Lương Thị T',
       avatar: 'https://via.placeholder.com/48',
       mutualFriends: 3
     }
@@ -19,18 +127,144 @@ const Friend = () => {
 
   const [requestedUsers, setRequestedUsers] = useState([
     {
-      id: 3,
-      name: 'Lê Văn C',
+      id: 21,
+      name: 'Nguyễn Văn U',
       avatar: 'https://via.placeholder.com/48',
       mutualFriends: 8,
       requestedAt: '2024-03-15'
     },
     {
-      id: 4,
-      name: 'Phạm Thị D',
+      id: 22,
+      name: 'Trần Thị V',
       avatar: 'https://via.placeholder.com/48',
-      mutualFriends: 4, 
+      mutualFriends: 4,
       requestedAt: '2024-03-14'
+    },
+    {
+      id: 23,
+      name: 'Lê Văn W',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 6,
+      requestedAt: '2024-03-13'
+    },
+    {
+      id: 24,
+      name: 'Phạm Thị X',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 5,
+      requestedAt: '2024-03-12'
+    },
+    {
+      id: 25,
+      name: 'Hoàng Văn Y',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 7,
+      requestedAt: '2024-03-11'
+    },
+    {
+      id: 26,
+      name: 'Vũ Thị Z',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 3,
+      requestedAt: '2024-03-10'
+    },
+    {
+      id: 27,
+      name: 'Đặng Văn AA',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 8,
+      requestedAt: '2024-03-09'
+    },
+    {
+      id: 28,
+      name: 'Trương Thị BB',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 4,
+      requestedAt: '2024-03-08'
+    },
+    {
+      id: 29,
+      name: 'Mai Văn CC',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 6,
+      requestedAt: '2024-03-07'
+    },
+    {
+      id: 30,
+      name: 'Lý Thị DD',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 5,
+      requestedAt: '2024-03-06'
+    },
+    {
+      id: 31,
+      name: 'Đinh Văn EE',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 7,
+      requestedAt: '2024-03-05'
+    },
+    {
+      id: 32,
+      name: 'Bùi Thị FF',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 3,
+      requestedAt: '2024-03-04'
+    },
+    {
+      id: 33,
+      name: 'Ngô Văn GG',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 8,
+      requestedAt: '2024-03-03'
+    },
+    {
+      id: 34,
+      name: 'Dương Thị HH',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 4,
+      requestedAt: '2024-03-02'
+    },
+    {
+      id: 35,
+      name: 'Phan Văn II',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 6,
+      requestedAt: '2024-03-01'
+    },
+    {
+      id: 36,
+      name: 'Võ Thị JJ',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 5,
+      requestedAt: '2024-02-29'
+    },
+    {
+      id: 37,
+      name: 'Đỗ Văn KK',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 7,
+      requestedAt: '2024-02-28'
+    },
+    {
+      id: 38,
+      name: 'Hồ Thị LL',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 3,
+      requestedAt: '2024-02-27'
+    },
+    {
+      id: 39,
+      name: 'Trịnh Văn MM',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 8,
+      requestedAt: '2024-02-26'
+    },
+    {
+      id: 40,
+      name: 'Lương Thị NN',
+      avatar: 'https://via.placeholder.com/48',
+      mutualFriends: 4,
+      requestedAt: '2024-02-25'
     }
   ])
 

@@ -5,11 +5,105 @@ import Rightbar from '../../components/Rightbar'
 const Home = () => {
   const [postContent, setPostContent] = useState('')
   const [selectedFile, setSelectedFile] = useState(null)
-  const [posts, setPosts] = useState([])
-  const [comments, setComments] = useState({}) // Lưu comments theo postId
-  const [showComments, setShowComments] = useState({}) // Hiển thị/ẩn comments
-  const [commentContent, setCommentContent] = useState('') // Nội dung comment
-  const [typingUsers, setTypingUsers] = useState({}) // Add typingUsers state
+  const [posts, setPosts] = useState([
+    {
+      id: 1,
+      content: "Xin chào mọi người! Tôi là John và đây là bài đăng đầu tiên của tôi 👋",
+      file: "https://picsum.photos/id/1/800/600",
+      fileType: "image",
+      timestamp: new Date("2024-01-15T08:30:00"),
+      user: {
+        name: "John Smith",
+        avatar: "https://i.pravatar.cc/150?img=1"
+      },
+      likes: 15,
+      liked: false,
+      shares: 3
+    },
+    {
+      id: 2, 
+      content: "Vừa hoàn thành dự án mới! #coding #developer",
+      file: "https://picsum.photos/id/2/800/600",
+      fileType: "image",
+      timestamp: new Date("2024-01-14T15:45:00"),
+      user: {
+        name: "Emma Wilson",
+        avatar: "https://i.pravatar.cc/150?img=2"
+      },
+      likes: 24,
+      liked: false,
+      shares: 5
+    },
+    {
+      id: 3,
+      content: "Chia sẻ một số tips về lập trình mà tôi học được gần đây...",
+      file: null,
+      fileType: null,
+      timestamp: new Date("2024-01-14T10:20:00"),
+      user: {
+        name: "David Chen",
+        avatar: "https://i.pravatar.cc/150?img=3"
+      },
+      likes: 32,
+      liked: false,
+      shares: 8
+    },
+    {
+      id: 4,
+      content: "Đang làm việc trên một dự án thú vị với React và Node.js! 🚀",
+      file: "https://picsum.photos/id/3/800/600",
+      fileType: "image", 
+      timestamp: new Date("2024-01-13T16:15:00"),
+      user: {
+        name: "Sarah Johnson",
+        avatar: "https://i.pravatar.cc/150?img=4"
+      },
+      likes: 45,
+      liked: false,
+      shares: 12
+    },
+    {
+      id: 5,
+      content: "Vừa tham gia một workshop tuyệt vời về AI và Machine Learning!",
+      file: "https://picsum.photos/id/4/800/600",
+      fileType: "image",
+      timestamp: new Date("2024-01-13T09:30:00"), 
+      user: {
+        name: "Michael Brown",
+        avatar: "https://i.pravatar.cc/150?img=5"
+      },
+      likes: 38,
+      liked: false,
+      shares: 7
+    }
+  ])
+  const [comments, setComments] = useState({
+    1: [
+      {
+        id: 101,
+        content: "Chào mừng bạn John!",
+        user: {
+          name: "Emma Wilson",
+          avatar: "https://i.pravatar.cc/150?img=2"
+        },
+        timestamp: new Date("2024-01-15T08:35:00")
+      }
+    ],
+    2: [
+      {
+        id: 201,
+        content: "Tuyệt vời! Dự án gì vậy Emma?",
+        user: {
+          name: "David Chen", 
+          avatar: "https://i.pravatar.cc/150?img=3"
+        },
+        timestamp: new Date("2024-01-14T15:50:00")
+      }
+    ]
+  })
+  const [showComments, setShowComments] = useState({})
+  const [commentContent, setCommentContent] = useState('')
+  const [typingUsers, setTypingUsers] = useState({})
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -82,7 +176,6 @@ const Home = () => {
   }
 
   const handleShare = (post) => {
-    // Tạo bài đăng mới trên trang profile với nội dung được chia sẻ
     const sharedPost = {
       ...post,
       id: Date.now(),
@@ -92,7 +185,6 @@ const Home = () => {
     }
     setPosts([sharedPost, ...posts])
     
-    // Cập nhật số lượt chia sẻ
     setPosts(posts.map(p => {
       if (p.id === post.id) {
         return {...p, shares: p.shares + 1}
@@ -101,7 +193,6 @@ const Home = () => {
     }))
   }
 
-  // Thêm hàm xóa comment
   const handleDeleteComment = (postId, commentId) => {
     setComments({
       ...comments,
@@ -109,7 +200,6 @@ const Home = () => {
     })
   }
 
-  // Thêm hàm xáo trộn bài post
   const handleShufflePosts = () => {
     const shuffledPosts = [...posts]
     for (let i = shuffledPosts.length - 1; i > 0; i--) {
@@ -119,7 +209,6 @@ const Home = () => {
     setPosts(shuffledPosts)
   }
 
-  // Thêm hàm xóa bài post
   const handleDeletePost = (postId) => {
     if (window.confirm('Bạn có chắc chắn muốn xóa bài viết này không?')) {
       setPosts(posts.filter(post => post.id !== postId))
@@ -421,55 +510,6 @@ const Home = () => {
               </div>
             </div>
           ))}
-
-          {/* Sample Post */}
-          <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <div className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <img
-                    src="https://via.placeholder.com/48"
-                    alt="User"
-                    className="rounded-full ring-2 ring-blue-100"
-                  />
-                  <div>
-                    <h3 className="font-semibold text-lg">Người dùng</h3>
-                    <p className="text-gray-500 text-sm">2 giờ trước</p>
-                  </div>
-                </div>
-                <button className="p-2 hover:bg-red-50 rounded-full transition-colors group">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-hover:text-red-500" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                </button>
-              </div>
-              <p className="mt-4 text-gray-800">Đây là nội dung bài viết mẫu</p>
-              <img
-                src="https://via.placeholder.com/500x300"
-                alt="Post content"
-                className="mt-4 w-full rounded-xl object-cover"
-              />
-              <div className="mt-4 flex items-center space-x-4 text-gray-500">
-                <span>0 lượt thích</span>
-                <span>0 bình luận</span>
-                <span>0 lượt chia sẻ</span>
-              </div>
-              <div className="flex justify-center gap-32 mt-6 pt-3 border-t border-gray-100">
-                <button className="flex items-center space-x-2 hover:bg-blue-50 px-6 py-2.5 rounded-xl transition-colors">
-                  <span className="text-xl">👍</span>
-                  <span className="font-medium">Thích</span>
-                </button>
-                <button className="flex items-center space-x-2 hover:bg-blue-50 px-6 py-2.5 rounded-xl transition-colors">
-                  <span className="text-xl">💬</span>
-                  <span className="font-medium">Bình luận</span>
-                </button>
-                <button className="flex items-center space-x-2 hover:bg-blue-50 px-6 py-2.5 rounded-xl transition-colors">
-                  <span className="text-xl">↗️</span>
-                  <span className="font-medium">Chia sẻ</span>
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 

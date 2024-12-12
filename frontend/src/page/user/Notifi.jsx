@@ -13,8 +13,8 @@ const Notifi = () => {
       avatar: 'https://via.placeholder.com/40'
     },
     {
-      id: 2, 
-      type: 'comment',
+      id: 2,
+      type: 'comment', 
       user: 'Trần Thị B',
       content: 'đã bình luận về bài viết của bạn',
       time: '10 phút trước',
@@ -26,8 +26,161 @@ const Notifi = () => {
       type: 'share',
       user: 'Lê Văn C',
       content: 'đã chia sẻ bài viết của bạn',
-      time: '1 giờ trước', 
+      time: '15 phút trước',
       isRead: true,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 4,
+      type: 'like',
+      user: 'Phạm Thị D',
+      content: 'đã thích bình luận của bạn',
+      time: '20 phút trước',
+      isRead: false,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 5,
+      type: 'comment',
+      user: 'Hoàng Văn E',
+      content: 'đã trả lời bình luận của bạn',
+      time: '30 phút trước',
+      isRead: true,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 6,
+      type: 'share',
+      user: 'Vũ Thị F',
+      content: 'đã chia sẻ ảnh của bạn',
+      time: '45 phút trước',
+      isRead: false,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 7,
+      type: 'like',
+      user: 'Đặng Văn G',
+      content: 'đã thích bài viết của bạn',
+      time: '1 giờ trước',
+      isRead: true,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 8,
+      type: 'comment',
+      user: 'Bùi Thị H',
+      content: 'đã bình luận về ảnh của bạn',
+      time: '2 giờ trước',
+      isRead: false,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 9,
+      type: 'share',
+      user: 'Ngô Văn I',
+      content: 'đã chia sẻ bài viết của bạn',
+      time: '3 giờ trước',
+      isRead: true,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 10,
+      type: 'like',
+      user: 'Dương Thị K',
+      content: 'đã thích bình luận của bạn',
+      time: '4 giờ trước',
+      isRead: false,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 11,
+      type: 'comment',
+      user: 'Lý Văn L',
+      content: 'đã bình luận về bài viết của bạn',
+      time: '5 giờ trước',
+      isRead: true,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 12,
+      type: 'share',
+      user: 'Mai Thị M',
+      content: 'đã chia sẻ ảnh của bạn',
+      time: '6 giờ trước',
+      isRead: false,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 13,
+      type: 'like',
+      user: 'Phan Văn N',
+      content: 'đã thích bài viết của bạn',
+      time: '7 giờ trước',
+      isRead: true,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 14,
+      type: 'comment',
+      user: 'Trương Thị O',
+      content: 'đã bình luận về ảnh của bạn',
+      time: '8 giờ trước',
+      isRead: false,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 15,
+      type: 'share',
+      user: 'Đỗ Văn P',
+      content: 'đã chia sẻ bài viết của bạn',
+      time: '9 giờ trước',
+      isRead: true,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 16,
+      type: 'like',
+      user: 'Võ Thị Q',
+      content: 'đã thích bình luận của bạn',
+      time: '10 giờ trước',
+      isRead: false,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 17,
+      type: 'comment',
+      user: 'Hồ Văn R',
+      content: 'đã bình luận về bài viết của bạn',
+      time: '11 giờ trước',
+      isRead: true,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 18,
+      type: 'share',
+      user: 'Đinh Thị S',
+      content: 'đã chia sẻ ảnh của bạn',
+      time: '12 giờ trước',
+      isRead: false,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 19,
+      type: 'like',
+      user: 'Lương Văn T',
+      content: 'đã thích bài viết của bạn',
+      time: '1 ngày trước',
+      isRead: true,
+      avatar: 'https://via.placeholder.com/40'
+    },
+    {
+      id: 20,
+      type: 'comment',
+      user: 'Trịnh Thị U',
+      content: 'đã bình luận về ảnh của bạn',
+      time: '2 ngày trước',
+      isRead: false,
       avatar: 'https://via.placeholder.com/40'
     }
   ])
