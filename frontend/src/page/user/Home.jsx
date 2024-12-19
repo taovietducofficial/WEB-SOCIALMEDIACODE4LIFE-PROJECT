@@ -21,7 +21,7 @@ const Home = () => {
       shares: 3
     },
     {
-      id: 2, 
+      id: 2,
       content: "Vừa hoàn thành dự án mới! #coding #developer",
       file: "https://picsum.photos/id/2/800/600",
       fileType: "image",
@@ -52,7 +52,7 @@ const Home = () => {
       id: 4,
       content: "Đang làm việc trên một dự án thú vị với React và Node.js! 🚀",
       file: "https://picsum.photos/id/3/800/600",
-      fileType: "image", 
+      fileType: "image",
       timestamp: new Date("2024-01-13T16:15:00"),
       user: {
         name: "Sarah Johnson",
@@ -67,7 +67,7 @@ const Home = () => {
       content: "Vừa tham gia một workshop tuyệt vời về AI và Machine Learning!",
       file: "https://picsum.photos/id/4/800/600",
       fileType: "image",
-      timestamp: new Date("2024-01-13T09:30:00"), 
+      timestamp: new Date("2024-01-13T09:30:00"),
       user: {
         name: "Michael Brown",
         avatar: "https://i.pravatar.cc/150?img=5"
@@ -94,7 +94,7 @@ const Home = () => {
         id: 201,
         content: "Tuyệt vời! Dự án gì vậy Emma?",
         user: {
-          name: "David Chen", 
+          name: "David Chen",
           avatar: "https://i.pravatar.cc/150?img=3"
         },
         timestamp: new Date("2024-01-14T15:50:00")
@@ -184,10 +184,10 @@ const Home = () => {
       originalPost: post
     }
     setPosts([sharedPost, ...posts])
-    
+
     setPosts(posts.map(p => {
       if (p.id === post.id) {
-        return {...p, shares: p.shares + 1}
+        return { ...p, shares: p.shares + 1 }
       }
       return p
     }))
@@ -216,14 +216,14 @@ const Home = () => {
   }
 
   return (
-    <div className="flex bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Left Sidebar */}
-      <div className="w-1/4 fixed h-screen border-r border-gray-200">
+      <div className="w-1/4 fixed h-screen border-r border-gray-200 hidden lg:block">
         <Sidebar />
       </div>
 
       {/* Main Content */}
-      <div className="w-1/2 mx-auto mt-6 px-6">
+      <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-auto mt-6 px-4 sm:px-6">
         {/* Create Post */}
         <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 mb-6">
           <div className="flex items-center space-x-4">
@@ -309,7 +309,7 @@ const Home = () => {
                         className="max-h-96 w-full rounded-lg object-contain"
                       />
                     )}
-                    <button 
+                    <button
                       onClick={() => setSelectedFile(null)}
                       className="absolute top-2 right-2 p-2 bg-gray-800/70 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                     >
@@ -338,11 +338,10 @@ const Home = () => {
                 <button
                   onClick={handlePost}
                   disabled={!postContent.trim() && !selectedFile}
-                  className={`w-full mt-6 py-2.5 rounded-xl font-medium transition-colors ${
-                    postContent.trim() || selectedFile
+                  className={`w-full mt-6 py-2.5 rounded-xl font-medium transition-colors ${postContent.trim() || selectedFile
                       ? 'bg-blue-500 hover:bg-blue-600 text-white'
                       : 'bg-blue-200 text-white cursor-not-allowed'
-                  }`}
+                    }`}
                 >
                   Đăng
                 </button>
@@ -375,7 +374,7 @@ const Home = () => {
                       </p>
                     </div>
                   </div>
-                  <button 
+                  <button
                     onClick={() => handleDeletePost(post.id)}
                     className="p-2 hover:bg-red-50 rounded-full transition-colors group"
                   >
@@ -406,21 +405,21 @@ const Home = () => {
                   <span>{post.shares} lượt chia sẻ</span>
                 </div>
                 <div className="flex justify-center gap-32 mt-6 pt-3 border-t border-gray-100">
-                  <button 
+                  <button
                     onClick={() => handleLike(post.id)}
                     className={`flex items-center space-x-2 hover:bg-blue-50 px-6 py-2.5 rounded-xl transition-colors ${post.liked ? 'text-blue-500' : ''}`}
                   >
                     <span className="text-xl">👍</span>
                     <span className="font-medium">Thích</span>
                   </button>
-                  <button 
+                  <button
                     onClick={() => toggleComments(post.id)}
                     className="flex items-center space-x-2 hover:bg-blue-50 px-6 py-2.5 rounded-xl transition-colors"
                   >
                     <span className="text-xl">💬</span>
                     <span className="font-medium">Bình luận</span>
                   </button>
-                  <button 
+                  <button
                     onClick={() => handleShare(post)}
                     className="flex items-center space-x-2 hover:bg-blue-50 px-6 py-2.5 rounded-xl transition-colors"
                   >
@@ -460,7 +459,7 @@ const Home = () => {
                         </button>
                       </div>
                     </div>
-                    
+
                     {/* Comment List with Real-time Updates */}
                     <div className="relative">
                       {comments[post.id]?.map(comment => (
@@ -477,7 +476,7 @@ const Home = () => {
                             </div>
                             <div className="mt-1 text-sm text-gray-500 flex items-center space-x-2">
                               <span>{new Date(comment.timestamp).toLocaleTimeString()}</span>
-                              <button 
+                              <button
                                 onClick={() => handleDeleteComment(post.id, comment.id)}
                                 className="text-red-500 hover:text-red-600"
                               >
@@ -497,7 +496,7 @@ const Home = () => {
                           </div>
                         </div>
                       ))}
-                      
+
                       {/* Real-time typing indicator */}
                       {typingUsers[post.id]?.length > 0 && (
                         <div className="absolute bottom-0 left-0 w-full bg-white/80 backdrop-blur-sm p-2 rounded-lg text-sm text-gray-500">
@@ -514,7 +513,7 @@ const Home = () => {
       </div>
 
       {/* Right Sidebar */}
-      <div className="w-1/4 fixed right-0 h-screen border-l border-gray-200">
+      <div className="w-1/4 fixed h-screen border-r border-gray-200 hidden lg:block">
         <Rightbar />
       </div>
     </div>
