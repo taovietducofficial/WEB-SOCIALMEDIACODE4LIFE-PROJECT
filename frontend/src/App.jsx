@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import adminRoutes from './router/Admin';
-import userRoutes from './router/User';
-import instructorRoutes from './router/Instructor';
+import adminRoutes from './routers/admin';
+import userRoutes from './routers/user';
+import instructorRoutes from './routers/instructor';  // Corrected path
 import Navbar from './components/Navbar';
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
         </Routes>
       </div>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;
