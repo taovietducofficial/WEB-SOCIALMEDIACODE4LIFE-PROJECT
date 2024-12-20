@@ -28,9 +28,9 @@ const Login = () => {
       // Hardcoded credentials
       const validAccounts = [
         { username: 'taovietduc193', password: '1234567' },
-        { username: 'taovietduc194', password: '1234567' },
-        { username: 'taovietduc195', password: '1234567' },
-        { username: 'taovietduc196', password: '1234567' },
+        { username: 'taovietduc21110169', password: '123456789' },
+        { username: 'cothe', password: 'cothe123' },
+        { username: 'cothe1', password: 'cothe1234' },
         { username: 'taovietduc197', password: '1234567' },
         { username: 'taovietduc198', password: '1234567' },
         { username: 'taovietduc199', password: '1234567' },

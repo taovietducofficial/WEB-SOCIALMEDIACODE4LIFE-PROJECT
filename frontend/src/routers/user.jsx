@@ -14,7 +14,7 @@ const userRoutes = [
     {path: '/user/notifications', component: Notifi},
     {path: '/user/profile', component: Profile},
     {path: '/user/friends', component: Friend},
-    {path: '/login', component: Login},
+    {path: '/', component: Login},
     {path: '/signup', component: Signup},
 ]
 

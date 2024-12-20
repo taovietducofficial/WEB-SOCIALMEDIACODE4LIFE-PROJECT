@@ -6,7 +6,7 @@ const Rightbar = () => {
     {
       id: 1,
       name: 'Nguyễn Văn A', 
-      avatar: 'https://via.placeholder.com/40'
+      avatar: "/428629140_122123821286195094_987946793325005882_n (1).jpg"
     },
     {
       id: 2,

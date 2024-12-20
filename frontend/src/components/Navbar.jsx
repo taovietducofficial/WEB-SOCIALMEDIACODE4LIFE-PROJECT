@@ -74,7 +74,7 @@ const Navbar = () => {
           {/* Right section */}
           <div className="flex items-center absolute right-4">
             <div className="hidden md:flex items-center space-x-2">
-              <Link to="/login" className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition duration-200 font-medium">
+              <Link to="/" className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition duration-200 font-medium">
                 Đăng nhập
               </Link>
               <Link to="/signup" className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition duration-200 font-medium shadow-md hover:shadow-lg">
@@ -154,7 +154,7 @@ const Navbar = () => {
                 </div>
               </Link>
               <div className="border-t mt-2 pt-2">
-                <Link to="/login" className="block px-3 py-2 text-blue-600 hover:bg-gray-100/80 rounded-md transition duration-200 font-medium">
+                <Link to="/" className="block px-3 py-2 text-blue-600 hover:bg-gray-100/80 rounded-md transition duration-200 font-medium">
                   Đăng nhập
                 </Link>
                 <Link to="/signup" className="block px-3 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-md transition duration-200 font-medium mt-2">

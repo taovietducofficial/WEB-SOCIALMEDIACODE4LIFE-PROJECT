@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { C_Account } from '../../api/user/C_Account'
+import emailjs from 'emailjs-com' // Thêm thư viện EmailJS (cài đặt bằng npm install emailjs-com)
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -9,6 +10,31 @@ const Signup = () => {
     email: '',
     password: ''
   })
+  const [verificationCode, setVerificationCode] = useState('')
+
+  // Hàm tạo mã xác thực
+  const generateVerificationCode = () => {
+    return Math.floor(100000 + Math.random() * 900000).toString()
+  }
+
+  // Hàm gửi email mã xác thực
+  const sendVerificationEmail = async (email, code) => {
+    try {
+      await emailjs.send(
+        'taovietduc', // Thay bằng service ID từ EmailJS
+        'template_77efk1x', // Thay bằng template ID từ EmailJS
+        {
+          to_email: email,
+          verification_code: code
+        },
+        '1adByH6e2T5bm6Msy' // Thay bằng user ID từ EmailJS
+      )
+      alert('Mã xác thực đã được gửi đến email của bạn.')
+    } catch (error) {
+      console.error('Lỗi khi gửi email:', error)
+      alert('Không thể gửi mã xác thực. Vui lòng thử lại.')
+    }
+  }
 
   const handleChange = (e) => {
     setFormData({
@@ -21,10 +47,17 @@ const Signup = () => {
     e.preventDefault()
     
     try {
+      const code = generateVerificationCode()
+      setVerificationCode(code)
+
+      // Gửi mã xác thực qua email
+      await sendVerificationEmail(formData.email, code)
+
+      // Đăng ký tài khoản
       const response = await C_Account(formData)
-      
+
       if (response.status === 'success') {
-        navigate('/login')
+        navigate('/')
       }
     } catch (error) {
       console.error('Error:', error)
@@ -97,7 +130,7 @@ const Signup = () => {
           </div>
 
           <div className="text-center">
-            <a href="/login" className="text-sm text-blue-600 hover:text-blue-500">
+            <a href="/" className="text-sm text-blue-600 hover:text-blue-500">
               Bạn đã có tài khoản?
             </a>
           </div>
