@@ -1,0 +1,94 @@
+[{
+  "_id": {
+    "$oid": "67520d197cd6c09d8ba01064"
+  },
+  "id": "1",
+  "name": "Khóa học Java cơ bản",
+  "instructor": "Nguyễn Văn A",
+  "level": "Cơ bản",
+  "duration": "30 giờ",
+  "price": 500000,
+  "description": "Học các khái niệm cơ bản của lập trình Java, bao gồm cú pháp, kiểu dữ liệu và lập trình hướng đối tượng."
+},
+{
+  "_id": {
+    "$oid": "67520d197cd6c09d8ba01065"
+  },
+  "id": "2",
+  "name": "Khóa học ReactJS chuyên sâu",
+  "instructor": "Trần Thị B",
+  "level": "Nâng cao",
+  "duration": "40 giờ",
+  "price": 1500000,
+  "description": "Khóa học tập trung vào ReactJS, từ việc xây dựng giao diện người dùng đến quản lý state với Redux."
+},
+{
+  "_id": {
+    "$oid": "67520d197cd6c09d8ba01066"
+  },
+  "id": "3",
+  "name": "Phân tích dữ liệu với Python",
+  "instructor": "Lê Văn C",
+  "level": "Trung cấp",
+  "duration": "35 giờ",
+  "price": 1200000,
+  "description": "Tìm hiểu cách sử dụng Python để phân tích dữ liệu, xử lý dữ liệu lớn, và tạo báo cáo trực quan."
+},
+{
+  "_id": {
+    "$oid": "67520d197cd6c09d8ba01067"
+  },
+  "id": "4",
+  "name": "Khóa học AI và Machine Learning",
+  "instructor": "Phạm Thị D",
+  "level": "Chuyên gia",
+  "duration": "50 giờ",
+  "price": 3000000,
+  "description": "Học các thuật toán AI, từ mạng neural đến máy học, áp dụng thực tế trong bài toán phân loại và dự đoán."
+},
+{
+  "_id": {
+    "$oid": "67520d402323c9321cdb5eb8"
+  },
+  "name": "Thiết kế UI/UX chuyên nghiệp",
+  "instructor": "Ngô Văn E",
+  "level": "Cơ bản",
+  "duration": "25 giờ",
+  "price": 700000,
+  "description": "Nắm vững các nguyên tắc thiết kế UI/UX, từ wireframe đến prototyping, và làm việc với các công cụ như Figma.",
+  "_class": "com.example.demo.model.Course"
+},
+{
+  "_id": {
+    "$oid": "67520d7c2323c9321cdb5eb9"
+  },
+  "name": "Thiết kế UI/UX chuyên nghiệp",
+  "instructor": "Ngô Văn E",
+  "level": "Cơ bản",
+  "duration": "25 giờ",
+  "price": 700000,
+  "description": "Nắm vững các nguyên tắc thiết kế UI/UX, từ wireframe đến prototyping, và làm việc với các công cụ như Figma.",
+  "_class": "com.example.demo.model.Course"
+},
+{
+  "_id": {
+    "$oid": "675210372323c9321cdb5eba"
+  },
+  "instructor": "duc",
+  "level": "dễ",
+  "duration": "30 phút",
+  "price": 300000,
+  "description": "hay",
+  "_class": "com.example.demo.model.Course"
+},
+{
+  "_id": {
+    "$oid": "6753b17818922954252be9e5"
+  },
+  "instructor": "Nguyễn Minh Đạo",
+  "level": "Đại Học",
+  "duration": "15 tuần",
+  "price": 3000000,
+  "description": "học thầy rất tuyệt vời",
+  "_class": "com.example.demo.model.Course"
+}]

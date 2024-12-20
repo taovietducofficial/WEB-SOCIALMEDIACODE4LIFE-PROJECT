@@ -1,0 +1,198 @@
+[{
+  "_id": {
+    "$oid": "675176787cd6c09d8ba01013"
+  },
+  "id": "64b7f36e2b7e4a32e8d1f56a",
+  "username": "john_doe",
+  "password": "$2a$10$KjBh.xuNpY.cRmByK6P.qO38Qm8Nu1fWJlf2y8UNQU7kG85vKUGla",
+  "email": "john.doe@example.com",
+  "createdAt": "2024-12-05T08:30:00",
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "675176787cd6c09d8ba01014"
+  },
+  "id": "64b7f46e2b7e4a32e8d1f57b",
+  "username": "jane_smith",
+  "password": "$2a$10$xz2QqFJhBef/FmO9k9.sHOJTYRQK6X6A53A48ED.zy6u5ZlpS8m9W",
+  "email": "jane.smith@example.com",
+  "createdAt": "2024-12-05T09:00:00",
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "675176787cd6c09d8ba01015"
+  },
+  "id": "64b7f56e2b7e4a32e8d1f58c",
+  "username": "alex_brown",
+  "password": "$2a$10$d0v56QFJx7HK5XzRFTzvcehfwcYujLvO8fW13B3IcCqMw8BzZ4tbG",
+  "email": "alex.brown@example.com",
+  "createdAt": "2024-12-05T10:00:00",
+  "isActive": false
+},
+{
+  "_id": {
+    "$oid": "675176787cd6c09d8ba01018"
+  },
+  "id": "64b7f86e2b7e4a32e8d1f5bf",
+  "username": "emily_jackson",
+  "password": "$2a$10$9FVZ.Mn/5JUnWzLkmRN8iOPyT9OuUlMy.Mj3GFOJrGW3L6.F50XXW",
+  "email": "emily.jackson@example.com",
+  "createdAt": "2024-12-01T18:00:00",
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "6751d69249709860850608f9"
+  },
+  "username": "vietduc",
+  "password": "MTIz",
+  "email": "vietduc@gmail.com",
+  "createdAt": {
+    "$date": "2024-12-05T16:36:34.133Z"
+  },
+  "isActive": true,
+  "isDeleted": false,
+  "_class": "com.example.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6751d9a049709860850608fb"
+  },
+  "username": "taovietduc",
+  "password": "MTIzNDU2",
+  "email": "taovietduc@gmial.com",
+  "createdAt": {
+    "$date": "2024-12-05T16:49:36.502Z"
+  },
+  "isActive": true,
+  "isDeleted": false,
+  "_class": "com.example.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6751da0749709860850608fc"
+  },
+  "username": "taovietduc1",
+  "password": "MTIzNA==",
+  "email": "taovietduc1@gmial.com",
+  "createdAt": {
+    "$date": "2024-12-05T16:51:19.756Z"
+  },
+  "isActive": true,
+  "isDeleted": false,
+  "_class": "com.example.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6751da3f49709860850608fd"
+  },
+  "username": "taovietduc19",
+  "password": "MTIzNDU=",
+  "email": "taovietduc19@gmial.com",
+  "createdAt": {
+    "$date": "2024-12-05T16:52:15.355Z"
+  },
+  "isActive": true,
+  "isDeleted": false,
+  "_class": "com.example.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6751da6f49709860850608fe"
+  },
+  "username": "taovietduc193",
+  "password": "MTIzNDU2Nw==",
+  "email": "taovietduc193@gmial.com",
+  "createdAt": {
+    "$date": "2024-12-05T16:53:03.407Z"
+  },
+  "isActive": true,
+  "isDeleted": false,
+  "_class": "com.example.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6751e2d449709860850608ff"
+  },
+  "username": "taovietduc1932",
+  "password": "MTIzNDU2Nzg5",
+  "email": "taovietduc1932@gmail.com",
+  "createdAt": {
+    "$date": "2024-12-05T17:28:52.584Z"
+  },
+  "isActive": true,
+  "isDeleted": false,
+  "_class": "com.example.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6751ea8f620c327061c93d9e"
+  },
+  "username": "taovietduc1932003",
+  "password": "MTIzMzIx",
+  "email": "taovietduc1932003@gmail.com",
+  "createdAt": {
+    "$date": "2024-12-05T18:01:50.825Z"
+  },
+  "isActive": true,
+  "isDeleted": false,
+  "_class": "com.example.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6751ee0b620c327061c93d9f"
+  },
+  "username": "taovietduc1234",
+  "password": "MTIzNDU2Nw==",
+  "email": "taovietduc1234@gamil.com",
+  "createdAt": {
+    "$date": "2024-12-05T18:16:43.121Z"
+  },
+  "isActive": true,
+  "isDeleted": false,
+  "_class": "com.example.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6751ee14620c327061c93da0"
+  },
+  "username": "taovietduc12345",
+  "password": "MTIzNDU2Nw==",
+  "email": "taovietduc12345@gamil.com",
+  "createdAt": {
+    "$date": "2024-12-05T18:16:52.985Z"
+  },
+  "isActive": true,
+  "isDeleted": false,
+  "_class": "com.example.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6753abb618922954252be9e3"
+  },
+  "username": "vietduc19",
+  "password": "MTIz",
+  "email": "vietduc19@gmail.com",
+  "createdAt": {
+    "$date": "2024-12-07T01:58:14.231Z"
+  },
+  "isActive": true,
+  "isDeleted": false,
+  "_class": "com.example.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6753b04318922954252be9e4"
+  },
+  "username": "taovietduc123456",
+  "password": "MTIzNDQzMjE2",
+  "email": "taovietduc123456@gamil.com",
+  "createdAt": {
+    "$date": "2024-12-07T02:17:39.304Z"
+  },
+  "isActive": true,
+  "isDeleted": false,
+  "_class": "com.example.demo.model.User"
+}]

@@ -1,0 +1,132 @@
+[{
+  "_id": {
+    "$oid": "675218be7cd6c09d8ba0107f"
+  },
+  "id": "1",
+  "postId": "101",
+  "userId": "12345",
+  "userName": "Nguyễn Văn A",
+  "content": "Bài viết rất hữu ích! Cảm ơn tác giả.",
+  "createdAt": "2024-12-06T10:30:00",
+  "updatedAt": "2024-12-06T10:35:00"
+},
+{
+  "_id": {
+    "$oid": "675218be7cd6c09d8ba01080"
+  },
+  "id": "2",
+  "postId": "101",
+  "userId": "67890",
+  "userName": "Trần Thị B",
+  "content": "Mình gặp chút khó khăn khi làm theo hướng dẫn. Có thể cập nhật thêm ví dụ thực tế không?",
+  "createdAt": "2024-12-06T10:45:00",
+  "updatedAt": "2024-12-06T10:50:00"
+},
+{
+  "_id": {
+    "$oid": "675218be7cd6c09d8ba01081"
+  },
+  "id": "3",
+  "postId": "102",
+  "userId": "54321",
+  "userName": "Lê Văn C",
+  "content": "Mình nghĩ cách giải thích về thuật toán này rất rõ ràng và dễ hiểu.",
+  "createdAt": "2024-12-06T11:00:00",
+  "updatedAt": "2024-12-06T11:05:00"
+},
+{
+  "_id": {
+    "$oid": "675218be7cd6c09d8ba01082"
+  },
+  "id": "4",
+  "postId": "103",
+  "userId": "98765",
+  "userName": "Phạm Thị D",
+  "content": "Cảm ơn bài viết, nó rất hữu ích cho dự án hiện tại của tôi!",
+  "createdAt": "2024-12-06T12:00:00",
+  "updatedAt": "2024-12-06T12:05:00"
+},
+{
+  "_id": {
+    "$oid": "675218be7cd6c09d8ba01083"
+  },
+  "id": "5",
+  "postId": "104",
+  "userId": "11223",
+  "userName": "Ngô Văn E",
+  "content": "Bài viết rất chi tiết, nhưng có thể làm rõ thêm phần cấu trúc dữ liệu được không?",
+  "createdAt": "2024-12-06T12:30:00",
+  "updatedAt": "2024-12-06T12:35:00"
+},
+{
+  "_id": {
+    "$oid": "675218be7cd6c09d8ba01084"
+  },
+  "id": "6",
+  "postId": "105",
+  "userId": "65432",
+  "userName": "Đào Thị F",
+  "content": "Cảm ơn tác giả, mình đã áp dụng thành công vào dự án của mình. Cần thêm tài liệu về chủ đề này!",
+  "createdAt": "2024-12-06T13:00:00",
+  "updatedAt": "2024-12-06T13:05:00"
+},
+{
+  "_id": {
+    "$oid": "675218be7cd6c09d8ba01085"
+  },
+  "id": "7",
+  "postId": "106",
+  "userId": "78901",
+  "userName": "Vũ Văn G",
+  "content": "Đây là bài viết mình cần! Nhưng có thể thêm phần giải thích chi tiết về vấn đề gặp phải trong bước 3?",
+  "createdAt": "2024-12-06T13:30:00",
+  "updatedAt": "2024-12-06T13:35:00"
+},
+{
+  "_id": {
+    "$oid": "675218be7cd6c09d8ba01086"
+  },
+  "id": "8",
+  "postId": "107",
+  "userId": "32145",
+  "userName": "Bùi Thị H",
+  "content": "Một bài viết rất tuyệt vời, đã giúp tôi rất nhiều trong công việc. Cảm ơn bạn!",
+  "createdAt": "2024-12-06T14:00:00",
+  "updatedAt": "2024-12-06T14:05:00"
+},
+{
+  "_id": {
+    "$oid": "675218be7cd6c09d8ba01087"
+  },
+  "id": "9",
+  "postId": "108",
+  "userId": "55555",
+  "userName": "Lê Thị I",
+  "content": "Cảm ơn bạn! Mình gặp khó khăn trong việc thực hiện bước 4, có thể giải thích rõ hơn được không?",
+  "createdAt": "2024-12-06T14:30:00",
+  "updatedAt": "2024-12-06T14:35:00"
+},
+{
+  "_id": {
+    "$oid": "675218be7cd6c09d8ba01088"
+  },
+  "id": "10",
+  "postId": "109",
+  "userId": "22222",
+  "userName": "Nguyễn Thị K",
+  "content": "Bài viết rất hay, mình sẽ áp dụng ngay lập tức. Tuy nhiên, phần ví dụ thực tế có thể dễ hiểu hơn.",
+  "createdAt": "2024-12-06T15:00:00",
+  "updatedAt": "2024-12-06T15:05:00"
+},
+{
+  "_id": {
+    "$oid": "675218be7cd6c09d8ba01089"
+  },
+  "id": "11",
+  "postId": "110",
+  "userId": "44444",
+  "userName": "Trần Thị L",
+  "content": "Bài viết rất hay, nhưng tôi gặp vấn đề khi chạy thử chương trình. Có thể giúp tôi giải quyết không?",
+  "createdAt": "2024-12-06T15:30:00",
+  "updatedAt": "2024-12-06T15:35:00"
+}]

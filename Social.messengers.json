@@ -1,0 +1,78 @@
+[{
+  "_id": {
+    "$oid": "6752196b7cd6c09d8ba0109a"
+  },
+  "id": "1",
+  "senderId": "12345",
+  "senderName": "Nguyễn Văn A",
+  "receiverId": "67890",
+  "receiverName": "Trần Thị B",
+  "message": "Chào bạn, mình muốn hỏi về khóa học mới.",
+  "sentAt": "2024-12-06T08:30:00",
+  "status": "sent"
+},
+{
+  "_id": {
+    "$oid": "6752196b7cd6c09d8ba0109b"
+  },
+  "id": "2",
+  "senderId": "67890",
+  "senderName": "Trần Thị B",
+  "receiverId": "12345",
+  "receiverName": "Nguyễn Văn A",
+  "message": "Chào bạn! Bạn muốn hỏi về khóa học nào vậy?",
+  "sentAt": "2024-12-06T08:35:00",
+  "status": "read"
+},
+{
+  "_id": {
+    "$oid": "6752196b7cd6c09d8ba0109c"
+  },
+  "id": "3",
+  "senderId": "11223",
+  "senderName": "Nguyễn Thị C",
+  "receiverId": "33445",
+  "receiverName": "Vũ Thị D",
+  "message": "Mình đã gửi tài liệu mà bạn yêu cầu rồi.",
+  "sentAt": "2024-12-06T09:00:00",
+  "status": "sent"
+},
+{
+  "_id": {
+    "$oid": "6752196b7cd6c09d8ba0109d"
+  },
+  "id": "4",
+  "senderId": "33445",
+  "senderName": "Vũ Thị D",
+  "receiverId": "11223",
+  "receiverName": "Nguyễn Thị C",
+  "message": "Cảm ơn bạn, mình đã nhận được tài liệu rồi.",
+  "sentAt": "2024-12-06T09:10:00",
+  "status": "read"
+},
+{
+  "_id": {
+    "$oid": "6752196b7cd6c09d8ba0109e"
+  },
+  "id": "5",
+  "senderId": "22334",
+  "senderName": "Lê Thị E",
+  "receiverId": "55667",
+  "receiverName": "Trần Thị F",
+  "message": "Bạn có thể giúp tôi sửa lỗi trong dự án không?",
+  "sentAt": "2024-12-06T10:00:00",
+  "status": "sent"
+},
+{
+  "_id": {
+    "$oid": "6752196b7cd6c09d8ba0109f"
+  },
+  "id": "6",
+  "senderId": "55667",
+  "senderName": "Trần Thị F",
+  "receiverId": "22334",
+  "receiverName": "Lê Thị E",
+  "message": "Tôi sẽ xem và trả lời bạn trong vài phút.",
+  "sentAt": "2024-12-06T10:05:00",
+  "status": "sent"
+}]

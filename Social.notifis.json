@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "675219a67cd6c09d8ba010a2"
+  },
+  "id": "1",
+  "userId": "12345",
+  "title": "Khóa học mới đã được tạo",
+  "message": "Khóa học 'Lập trình Java cho người mới bắt đầu' đã được thêm vào hệ thống. Tham gia ngay!",
+  "type": "course",
+  "timestamp": "2024-12-06T08:30:00",
+  "status": "unread"
+},
+{
+  "_id": {
+    "$oid": "675219a67cd6c09d8ba010a3"
+  },
+  "id": "2",
+  "userId": "67890",
+  "title": "Có bài viết mới trong nhóm",
+  "message": "Có một bài viết mới trong nhóm 'Lập trình Python'. Xem ngay để không bỏ lỡ!",
+  "type": "group",
+  "timestamp": "2024-12-06T09:00:00",
+  "status": "read"
+},
+{
+  "_id": {
+    "$oid": "675219a67cd6c09d8ba010a4"
+  },
+  "id": "3",
+  "userId": "11223",
+  "title": "Thông báo về sự kiện",
+  "message": "Sự kiện 'Học lập trình với AI' sẽ diễn ra vào ngày 10/12. Đăng ký tham gia ngay!",
+  "type": "event",
+  "timestamp": "2024-12-06T09:15:00",
+  "status": "unread"
+},
+{
+  "_id": {
+    "$oid": "675219a67cd6c09d8ba010a5"
+  },
+  "id": "4",
+  "userId": "33445",
+  "title": "Nhắc nhở về bài tập",
+  "message": "Bài tập 'Xây dựng ứng dụng Web' sắp hết hạn. Nộp bài ngay để không bị trễ!",
+  "type": "assignment",
+  "timestamp": "2024-12-06T10:00:00",
+  "status": "unread"
+},
+{
+  "_id": {
+    "$oid": "675219a67cd6c09d8ba010a6"
+  },
+  "id": "5",
+  "userId": "22334",
+  "title": "Thông báo về kết quả bài thi",
+  "message": "Bạn đã hoàn thành bài thi 'Kiến thức cơ bản về JavaScript'. Kết quả: Đạt.",
+  "type": "exam",
+  "timestamp": "2024-12-06T10:30:00",
+  "status": "read"
+},
+{
+  "_id": {
+    "$oid": "675219a67cd6c09d8ba010a7"
+  },
+  "id": "6",
+  "userId": "55667",
+  "title": "Có tin nhắn mới",
+  "message": "Bạn có tin nhắn mới từ Trần Thị F. Kiểm tra ngay!",
+  "type": "message",
+  "timestamp": "2024-12-06T11:00:00",
+  "status": "unread"
+}]

@@ -1,0 +1,280 @@
+[{
+  "_id": {
+    "$oid": "675219337cd6c09d8ba0108d"
+  },
+  "id": "1",
+  "name": "Group A",
+  "description": "Một nhóm thảo luận về các kỹ thuật lập trình và công nghệ mới.",
+  "createdAt": "2024-12-01T10:00:00",
+  "updatedAt": "2024-12-01T10:05:00",
+  "ownerId": "12345",
+  "members": [
+    {
+      "userId": "12345",
+      "userName": "Nguyễn Văn A",
+      "role": "Admin"
+    },
+    {
+      "userId": "67890",
+      "userName": "Trần Thị B",
+      "role": "Member"
+    },
+    {
+      "userId": "54321",
+      "userName": "Lê Văn C",
+      "role": "Member"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "675219337cd6c09d8ba0108e"
+  },
+  "id": "2",
+  "name": "Group B",
+  "description": "Nhóm dành cho những ai yêu thích phát triển web và mobile.",
+  "createdAt": "2024-12-02T11:00:00",
+  "updatedAt": "2024-12-02T11:05:00",
+  "ownerId": "67890",
+  "members": [
+    {
+      "userId": "67890",
+      "userName": "Trần Thị B",
+      "role": "Admin"
+    },
+    {
+      "userId": "11223",
+      "userName": "Ngô Văn E",
+      "role": "Member"
+    },
+    {
+      "userId": "98765",
+      "userName": "Phạm Thị D",
+      "role": "Member"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "675219337cd6c09d8ba0108f"
+  },
+  "id": "3",
+  "name": "Group C",
+  "description": "Nhóm chia sẻ kiến thức về Data Science và Machine Learning.",
+  "createdAt": "2024-12-03T12:00:00",
+  "updatedAt": "2024-12-03T12:05:00",
+  "ownerId": "54321",
+  "members": [
+    {
+      "userId": "54321",
+      "userName": "Lê Văn C",
+      "role": "Admin"
+    },
+    {
+      "userId": "78901",
+      "userName": "Vũ Văn G",
+      "role": "Member"
+    },
+    {
+      "userId": "22222",
+      "userName": "Nguyễn Thị K",
+      "role": "Member"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "675219337cd6c09d8ba01090"
+  },
+  "id": "4",
+  "name": "Group D",
+  "description": "Một nhóm cho những người đam mê AI và công nghệ tương lai.",
+  "createdAt": "2024-12-04T13:00:00",
+  "updatedAt": "2024-12-04T13:05:00",
+  "ownerId": "11223",
+  "members": [
+    {
+      "userId": "11223",
+      "userName": "Ngô Văn E",
+      "role": "Admin"
+    },
+    {
+      "userId": "22222",
+      "userName": "Nguyễn Thị K",
+      "role": "Member"
+    },
+    {
+      "userId": "65432",
+      "userName": "Đào Thị F",
+      "role": "Member"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "675219337cd6c09d8ba01091"
+  },
+  "id": "5",
+  "name": "Group E",
+  "description": "Nhóm học hỏi về lập trình game và phát triển ứng dụng di động.",
+  "createdAt": "2024-12-05T14:00:00",
+  "updatedAt": "2024-12-05T14:05:00",
+  "ownerId": "98765",
+  "members": [
+    {
+      "userId": "98765",
+      "userName": "Phạm Thị D",
+      "role": "Admin"
+    },
+    {
+      "userId": "32145",
+      "userName": "Bùi Thị H",
+      "role": "Member"
+    },
+    {
+      "userId": "33333",
+      "userName": "Lý Thị J",
+      "role": "Member"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6752193e7cd6c09d8ba01093"
+  },
+  "id": "6",
+  "name": "Group F",
+  "description": "Nhóm trao đổi về DevOps và CI/CD trong phát triển phần mềm.",
+  "createdAt": "2024-12-06T15:00:00",
+  "updatedAt": "2024-12-06T15:05:00",
+  "ownerId": "11223",
+  "members": [
+    {
+      "userId": "11223",
+      "userName": "Ngô Văn E",
+      "role": "Admin"
+    },
+    {
+      "userId": "44444",
+      "userName": "Trương Thị I",
+      "role": "Member"
+    },
+    {
+      "userId": "55555",
+      "userName": "Hoàng Thị L",
+      "role": "Member"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6752193e7cd6c09d8ba01094"
+  },
+  "id": "7",
+  "name": "Group G",
+  "description": "Nhóm dành cho các lập trình viên Python và ứng dụng trong khoa học dữ liệu.",
+  "createdAt": "2024-12-07T16:00:00",
+  "updatedAt": "2024-12-07T16:05:00",
+  "ownerId": "54321",
+  "members": [
+    {
+      "userId": "54321",
+      "userName": "Lê Văn C",
+      "role": "Admin"
+    },
+    {
+      "userId": "66666",
+      "userName": "Vương Thị M",
+      "role": "Member"
+    },
+    {
+      "userId": "77777",
+      "userName": "Phan Thị N",
+      "role": "Member"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6752193e7cd6c09d8ba01095"
+  },
+  "id": "8",
+  "name": "Group H",
+  "description": "Nhóm thảo luận về Cyber Security và bảo mật mạng.",
+  "createdAt": "2024-12-08T17:00:00",
+  "updatedAt": "2024-12-08T17:05:00",
+  "ownerId": "78901",
+  "members": [
+    {
+      "userId": "78901",
+      "userName": "Vũ Văn G",
+      "role": "Admin"
+    },
+    {
+      "userId": "88888",
+      "userName": "Nguyễn Thị P",
+      "role": "Member"
+    },
+    {
+      "userId": "99999",
+      "userName": "Trần Thị Q",
+      "role": "Member"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6752193e7cd6c09d8ba01096"
+  },
+  "id": "9",
+  "name": "Group I",
+  "description": "Nhóm nghiên cứu về blockchain và tiền điện tử.",
+  "createdAt": "2024-12-09T18:00:00",
+  "updatedAt": "2024-12-09T18:05:00",
+  "ownerId": "22222",
+  "members": [
+    {
+      "userId": "22222",
+      "userName": "Nguyễn Thị K",
+      "role": "Admin"
+    },
+    {
+      "userId": "10101",
+      "userName": "Lê Thị R",
+      "role": "Member"
+    },
+    {
+      "userId": "12121",
+      "userName": "Bùi Thị O",
+      "role": "Member"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6752193e7cd6c09d8ba01097"
+  },
+  "id": "10",
+  "name": "Group J",
+  "description": "Nhóm dành cho những người yêu thích thiết kế giao diện người dùng (UI/UX).",
+  "createdAt": "2024-12-10T19:00:00",
+  "updatedAt": "2024-12-10T19:05:00",
+  "ownerId": "33333",
+  "members": [
+    {
+      "userId": "33333",
+      "userName": "Lý Thị J",
+      "role": "Admin"
+    },
+    {
+      "userId": "13131",
+      "userName": "Đào Thị S",
+      "role": "Member"
+    },
+    {
+      "userId": "14141",
+      "userName": "Trần Thị T",
+      "role": "Member"
+    }
+  ]
+}]
