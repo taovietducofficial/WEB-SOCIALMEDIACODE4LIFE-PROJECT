@@ -4,9 +4,13 @@
   <img src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t39.30808-6/472719806_122208127376195094_6332304844819532673_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=1EdHcBIkyGwQ7kNvgGu_W0F&_nc_oc=AdjG4WFrftf-avNZgci7Jw2U1yt1nI0ejXDR3-k4yzQ4QO0p8MhRpoIfjHFD9ACJ9uEyNAGcrmkEkX0nxUvRoZcL&_nc_zt=23&_nc_ht=scontent.fsgn5-3.fna&_nc_gid=APH82pNo-owrvTHzGo-1GuC&oh=00_AYCrfL9nrVcsC_OsJkcGFsZzctdQlg9ALaSYRVKpIOHHbQ&oe=67C46406" width="100" />
 </p>
 
+### Personal Project (Team: 1 - Solo)
 <p align="center">
   <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20115303.png" width="1000" />
 </p>
+
+
+
 
 <p align="justify">
 Only 85% of the complete code has been released due to certain ownership rights. Please review and respect this. Thank you very much!
