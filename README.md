@@ -213,3 +213,6 @@ Code4Life is a specialized social networking platform exclusively for the IT com
 </p>
 
 # THANK YOU FOR WATCHING!
+<p align="justify">
+Only 85% of the complete code has been pushed due to certain ownership rights reasons from me.
+</p>
