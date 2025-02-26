@@ -190,3 +190,26 @@ MongoDB is an open-source NoSQL database management system developed based on a 
 <p align="center">
   <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20113208.png" width="1000" />
 </p>
+
+# Backend Deployment
+## Install jdk-17 and setup classes
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20113801.png" width="1000" />
+</p>
+
+## Database connection
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Picture6.png" width="1000" />
+</p>
+
+## Test API
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Picture7.png" width="1000" />
+</p>
+
+# CONCLUSION
+<p align="justify">
+Code4Life is a specialized social networking platform exclusively for the IT community, built with the mission of connecting, learning, and sharing knowledge. Through the process of requirements analysis, system design, feature development, testing, and deployment, Code4Life has successfully implemented core features such as a Q&A forum, a programming project repository, a mentor-mentee system, study group management, and various online learning support tools.
+</p>
+
+# THANK YOU FOR WATCHING!
