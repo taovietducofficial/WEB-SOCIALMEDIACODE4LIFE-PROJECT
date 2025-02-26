@@ -106,3 +106,24 @@ MongoDB is an open-source NoSQL database management system developed based on a 
 </p>
 
 
+### General Use Case
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Picture4.png" width="1000" />
+</p>
+
+### System Management Sequence Diagram
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Picture5.png" width="1000" />
+</p>
+
+## SOCIAL NETWORK INSTALLATION
+### The installation environment includes: Operating System, Tools, and Required Software.
+- Frontend Development: Install ReactJS via npm, which comes with Node.js.
+- Backend Development: Java Development Kit (JDK) - Required version: 17 or higher.
+- Database Development : MongoDB (Required version: 6.x or later).
+- IDE and Editor : Visual Studio Code, IntelliJ IDEA.
+- Additional tools : Postman.
+
+
+
+
