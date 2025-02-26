@@ -99,4 +99,10 @@ MongoDB is an open-source NoSQL database management system developed based on a 
   <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Picture1.png" width="1000" />
 </p>
 
+## Functional Component Design Analysis
+### Overall System Activity Diagram
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Picture2.png" width="1000" />
+</p>
+
 
