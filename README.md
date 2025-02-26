@@ -124,6 +124,69 @@ MongoDB is an open-source NoSQL database management system developed based on a 
 - IDE and Editor : Visual Studio Code, IntelliJ IDEA.
 - Additional tools : Postman.
 
+# Frontend Deployment (ROLE: USER, ADMIN, Instructor)
+## USER ROLE
+### Navbar, Sidebar, Rightbar
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20105322.png" width="1000" />
+</p>
 
+### Home Page
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20111521.png" width="1000" />
+</p>
 
+### Creat Post Page
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20111646.png" width="1000" />
+</p>
 
+### Friend Page
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20111825.png" width="1000" />
+</p>
+
+### Group Page
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20112144.png" width="1000" />
+</p>
+
+### Create Group
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20112234.png" width="1000" />
+</p>
+
+### Notification Page
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20112353.png" width="1000" />
+</p>
+
+### Courses Page
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20112522.png" width="1000" />
+</p>
+
+### Create Courses
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20112609.png" width="1000" />
+</p>
+
+### Login Page
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20112651.png" width="1000" />
+</p>
+
+### Signup Page
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20112735.png" width="1000" />
+</p>
+
+## ADMIN ROLE
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20113107.png" width="1000" />
+</p>
+
+## Instructor ROLE
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Screenshot%202025-02-26%20113208.png" width="1000" />
+</p>
