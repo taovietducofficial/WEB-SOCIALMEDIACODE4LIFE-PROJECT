@@ -76,7 +76,7 @@ MongoDB is an open-source NoSQL database management system developed based on a 
 - Java & Gradle (for backend)
 - MongoDB (for database)
 
-## Comparison Table of Current Social Media Platforms
+### Comparison Table of Current Social Media Platforms
 
 | Criteria                | Facebook  | Instagram  | TikTok  | Threads  |
 |-------------------------|-----------|------------|---------|----------|
@@ -93,6 +93,10 @@ MongoDB is an open-source NoSQL database management system developed based on a 
 | **Community Growth Potential** | Very large, global connectivity | Large, based on images and videos | Very large, driven by viral content | Developing, leveraging Instagram's user base |
 
 
-
+## SOCIAL NETWORK DESIGN ANALYSIS
+### Class Diagram of the Code4Life Social Network System
+<p align="center">
+  <img src="https://github.com/taovietducofficial/WEB-SOCIALMEDIACODE4LIFE-PROJECT/blob/master/Picture1.png" width="1000" />
+</p>
 
 
