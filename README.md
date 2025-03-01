@@ -11,11 +11,6 @@
 
 
 
-
-<p align="justify">
-Only 85% of the complete code has been released due to certain ownership rights. Please review and respect this. Thank you very much!
-</p>
-
 ## FEATURES
 <p align="justify">
 Code4Life is a specialized social network for the Information Technology (IT) community. The system is designed to meet the needs of learning, knowledge sharing, and connecting members within the community.
